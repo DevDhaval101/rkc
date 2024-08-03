@@ -10,7 +10,7 @@ export default function FoodInput({ lable, dbLabel, bullet, fieldCount, max_w_la
         )}
 
         <label
-          htmlFor="lable"
+          htmlFor={dbLabel}
           className={`text-5xl mb-2 text-nowrap min-w-[${
             max_w_label ?? "340px"
           }] ${bullet === "star" && "font-bold"}`}

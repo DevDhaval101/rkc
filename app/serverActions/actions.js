@@ -38,8 +38,19 @@ export async function submitAction(prevState, formData) {
 }
 
 export async function saveOrderDetails(orderId, formData) {
-  const data = Object.fromEntries(formData);
+  const data = {};
 
+  for (let [key, value] of formData.entries()) {
+    if (data[key]) {
+      if (Array.isArray(data[key])) {
+        data[key].push(value);
+      } else {
+        data[key] = [data[key], value];
+      }
+    } else {
+      data[key] = value;
+    }
+  }
   let filteredData = {};
 
   for (let key in data) {
@@ -54,10 +65,10 @@ export async function saveOrderDetails(orderId, formData) {
     .db(process.env.DB_NAME)
     .collection(process.env.COLL_NAME);
 
-  const insertedValue = await collection.updateOne(
+  const updatedValue = await collection.updateOne(
     { _id: new ObjectId(orderId) },
     { $push: { orders: filteredData } }
   );
 
-  console.log(insertedValue);
+  // console.log(filteredData);
 }

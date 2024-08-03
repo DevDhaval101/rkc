@@ -11,7 +11,7 @@ export default function Navbar() {
           <Link href="/estimate">Create Estimate</Link>
         </li>
         <li>
-          <Link href="/orders">Orders</Link>
+          <Link href="/orderList">Orders</Link>
         </li>
       </ul>
     </nav>

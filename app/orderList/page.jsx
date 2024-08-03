@@ -1,4 +1,5 @@
 import getOrderList from "@/app/utils/getOrderList";
+import Link from 'next/link'
 
 export default async function OrderPage() {
   const orders = await getOrderList();
@@ -14,6 +15,7 @@ export default async function OrderPage() {
             <th className="border">મોબાઇલ નંબર</th>
             <th className="border">ઓર્ડર તારીખ</th>
             <th className="border">પ્રસંગનુ સરનામુ</th>
+            <th className="border">CTA</th>
           </tr>
         </thead>
         <tbody>
@@ -23,6 +25,7 @@ export default async function OrderPage() {
               <td className="border">{order.clientMoNum}</td>
               <td className="border">{order.orderDate}</td>
               <td className="border">{order.eventAddress}</td>
+              <td><Link href={`/orderList/${order._id}`}>View</Link></td>
             </tr>
           ))}
         </tbody>

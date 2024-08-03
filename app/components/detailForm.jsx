@@ -3,7 +3,7 @@ import FoodInput from "@/app/ui/FoodInput";
 import { saveOrderDetails } from "@/app/serverActions/actions";
 
 export default function DetailForm({orderId}) {
-  
+
   return (
     <div className="mt-5">
       <div>

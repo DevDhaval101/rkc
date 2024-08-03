@@ -9,7 +9,5 @@ export default async function getOrderList(){
 
     const orders = await collection.find({}).project({clientName: 1, clientMoNum: 1, orderDate:1, eventAddress: 1}).toArray()
 
-    // console.log(orders)
-
     return orders
 }
