@@ -1,4 +1,4 @@
-import FoodInput from "@/app/ui/FoodInput";
+import FoodInput from "@/app/ui/foodInput";
 
 import { saveOrderDetails } from "@/app/serverActions/actions";
 
