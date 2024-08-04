@@ -22,7 +22,7 @@ export default function OrderMainPage({estimate}) {
       </div>
       <div>
         <div>
-          <label htmlFor="" className="text-2xl">
+          <label htmlFor="" className="md:text-2xl text-base">
             સ્થળે રહેનારના નામ:
           </label>
         </div>

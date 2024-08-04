@@ -1,13 +1,13 @@
-export default function ViewOrderInput({tag, value}) {
+export default function ViewOrderInput({ tag, value, margin }) {
   return (
-    <div className="text-2xl flex">
-      <label htmlFor="" className="min-w-[200px] print:min-w-fit print:mx-2">{tag}</label>
-      <input
-        type="text"
-        placeholder={value}
-        disabled
-        className="placeholder:text-black bg-inherit"
-      />
+    <div className="md:text-2xl text-base flex">
+      <span
+        htmlFor=""
+        className={`${margin && "md:min-w-[200px] min-w-[110px]"} print:min-w-fit print:mx-2`}
+      >
+        {tag}
+      </span>
+      <p className="placeholder:text-black bg-inherit">{value}</p>
     </div>
   );
 }
