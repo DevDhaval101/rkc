@@ -1,19 +1,19 @@
 export default function FoodInput({ lable, dbLabel, bullet, fieldCount, max_w_label }) {
   return (
-    <div className="flex gap-4 items-center w-full">
+    <div className="flex md:gap-4 gap-2 items-center w-full">
       <div className="flex items-center">
         {bullet === "star" && (
-          <span className="text-5xl text-red-900">&#9733;</span>
+          <span className="md:text-5xl text-base text-red-900">&#9733;</span>
         )}
         {bullet === "arrow" && (
-          <span className="text-5xl text-red-900">&rarr;</span>
+          <span className="md:text-5xl text-base text-red-900">&rarr;</span>
         )}
 
         <label
           htmlFor={dbLabel}
-          className={`text-5xl mb-2 text-nowrap min-w-[${
+          className={`md:text-5xl text-base mb-2 text-nowrap md:min-w-[${
             max_w_label ?? "340px"
-          }] ${bullet === "star" && "font-bold"}`}
+          }] ${bullet === "star" && "font-bold"} min-w-[50px]`}
         >
           {lable}
         </label>

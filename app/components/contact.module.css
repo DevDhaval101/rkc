@@ -1,0 +1,12 @@
+.custom_bg {
+  background-color: #f3e9dd;
+  opacity: 0.8;
+  background-size: 4px 4px;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #c7beac 0,
+    #c7beac 0.4px,
+    #f3e9dd 0,
+    #f3e9dd 50%
+  );
+}

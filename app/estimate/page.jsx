@@ -14,7 +14,7 @@ import FlashMessage from "@/app/components/FlashMessage";
 
 export default function EstimatePage() {
   const [state, formAction] = useFormState(submitAction, {});
- 
+
   return (
     <div>
       <HeaderGuj />
@@ -22,7 +22,7 @@ export default function EstimatePage() {
       <div className="flex justify-center">
         <form
           action={formAction}
-          className="border w-[80%] flex flex-col gap-4 p-4"
+          className="border md:w-[80%] w-[95%] flex flex-col gap-4 p-4"
         >
           <ContactInput label="નામ:" type="text" name="clientName" />
           <ContactInput label="મોબાઇલ નંબર:" type="text" name="clientMoNum" />
@@ -36,10 +36,10 @@ export default function EstimatePage() {
           <ContactInput label="હસ્તક:" type="text" name="referer" />
           <ContactInput label="મોબાઇલ નંબર:" type="text" name="refererMo" />
           <div>
-            <label htmlFor="" className="text-5xl">
+            <label htmlFor="" className="md:text-5xl text-base">
               સ્થળે રહેનારના નામ:
             </label>
-            <div className="ml-24">
+            <div className="md:ml-24 ml-10">
               <ContactInput label="નામ:" name="spotPerson_1" />
               <ContactInput
                 label="મોબાઇલ નંબર:"
@@ -47,7 +47,7 @@ export default function EstimatePage() {
                 name="spotPerson_1_Mo"
               />
             </div>
-            <div className="ml-24">
+            <div className="md:ml-24 ml-10">
               <ContactInput label="નામ:" name="spotPerson_2" />
               <ContactInput
                 label="મોબાઇલ નંબર:"
@@ -57,7 +57,7 @@ export default function EstimatePage() {
             </div>
             <div className="flex justify-center">
               <div>
-                <button className="w-content bg-green-400 border rounded-md px-2 py-1 text-xl">
+                <button className="w-content bg-green-400 border rounded-md px-2 py-1 md:text-xl text-base mt-2">
                   Submit
                 </button>
               </div>

@@ -5,13 +5,13 @@ import { saveOrderDetails } from "@/app/serverActions/actions";
 export default function DetailForm({orderId}) {
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 w-full">
       <div>
         <p className="text-right">Order ID: {orderId}</p>
       </div>
       <div>
         <form action={saveOrderDetails.bind(null, orderId)} className="flex flex-col gap-4">
-          <div className="flex gap-5 justify-between">
+          <div className="flex md:flex-row flex-col gap-5 justify-between">
             <FoodInput
               lable="ઓર્ડર તારીખ:"
               bullet={"star"}
