@@ -1,9 +1,12 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { revalidatePath } from 'next/cache'
 
 import connectToDB from "@/app/utils/connectToDB";
 import { ObjectId } from "mongodb";
+
+
 
 export async function submitAction(prevState, formData) {
   const data = Object.fromEntries(formData);
@@ -71,4 +74,19 @@ export async function saveOrderDetails(orderId, formData) {
   );
 
   // console.log(filteredData);
+}
+
+export async function deleteOrder(orderId){
+
+  const client = await connectToDB();
+
+  const collection = client
+    .db(process.env.DB_NAME)
+    .collection(process.env.COLL_NAME);
+  
+  const result = await collection.findOneAndDelete({_id: new ObjectId(orderId)})
+
+  console.log(result)
+
+  revalidatePath('/orderList')
 }

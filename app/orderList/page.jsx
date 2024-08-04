@@ -1,10 +1,10 @@
 import getOrderList from "@/app/utils/getOrderList";
-import Link from 'next/link'
+import Link from "next/link";
+
+import DeleteBtn from "@/app/ui/deleteBtn";
 
 export default async function OrderPage() {
   const orders = await getOrderList();
-
-  console.log(orders);
 
   return (
     <div className="w-full">
@@ -25,7 +25,15 @@ export default async function OrderPage() {
               <td className="border">{order.clientMoNum}</td>
               <td className="border">{order.orderDate}</td>
               <td className="border">{order.eventAddress}</td>
-              <td><Link href={`/orderList/${order._id}`}>View</Link></td>
+              <td className="flex gap-2 items-center justify-center">
+                <Link
+                  href={`/orderList/${order._id}`}
+                  className="bg-blue-500 rounded-md px-2 py-1"
+                >
+                  View
+                </Link>
+                <DeleteBtn orderId={String(order._id)}/>
+              </td>
             </tr>
           ))}
         </tbody>
