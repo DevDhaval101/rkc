@@ -26,7 +26,7 @@ jobs:
       - run: npm ci
       - name: Create .env file
         run: |
-          echo "MONGODB_URI=${{ secrets.TMDB_API_KEY }}" >> .env
-          echo "DB_NAME=${{ secrets.TMDB_BASE_URL }}" >> .env
-          echo "COLL_NAME=${{ secrets.TMDB_BASE_URL }}" >> .env
+          echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> .env
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+          echo "COLL_NAME=${{ secrets.COLL_NAME }}" >> .env
       - run: npm run build --if-present
