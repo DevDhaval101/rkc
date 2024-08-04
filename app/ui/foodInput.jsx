@@ -1,7 +1,7 @@
 export default function FoodInput({ lable, dbLabel, bullet, fieldCount, max_w_label }) {
   return (
-    <div className="flex md:gap-4 gap-2 items-center w-full">
-      <div className="flex items-center">
+    <div className="flex gap-8 w-full">
+      <div className="flex">
         {bullet === "star" && (
           <span className="md:text-5xl text-base text-red-900">&#9733;</span>
         )}
@@ -23,7 +23,7 @@ export default function FoodInput({ lable, dbLabel, bullet, fieldCount, max_w_la
 
         {fieldCount > 1 && fieldCount < 3 && (
           <div>
-            <ul className="flex gap-12 list-decimal">
+            <ul className="flex md:flex-row flex-col md:gap-12 gap-2 list-decimal">
               <li>
                 <InputField lable={lable} dbLabel={dbLabel}/>
               </li>
@@ -36,7 +36,7 @@ export default function FoodInput({ lable, dbLabel, bullet, fieldCount, max_w_la
 
         {fieldCount > 2 && fieldCount < 5 && (
           <div>
-            <ul className="flex gap-12 list-decimal">
+            <ul className="flex md:flex-row flex-col md:gap-12 gap-2 list-decimal">
               <div>
                 <li>
                   <InputField lable={lable} dbLabel={dbLabel}/>
@@ -66,7 +66,7 @@ function InputField({ dbLabel }) {
     <input
       type="text"
       name={dbLabel}
-      className="border-b-2 border-dotted border-black h-10 w-full"
+      className="border-b-2 border-dotted border-black md:h-10 w-full"
     />
   );
 }

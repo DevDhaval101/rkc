@@ -66,7 +66,7 @@ export default function DetailForm({orderId}) {
               dbLabel="chaat"
             />
           </div>
-          <div className="text-5xl text-center py-1 bg-red-900 text-white">
+          <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
             ખાના ખજાના
           </div>
 
@@ -182,7 +182,7 @@ export default function DetailForm({orderId}) {
           </div>
 
           <div>
-            <div className="text-5xl text-center py-1 bg-red-900 text-white">
+            <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
               Extra
             </div>
             <ul className="flex flex-col gap-4 mt-4">
@@ -237,8 +237,8 @@ export default function DetailForm({orderId}) {
             </ul>
           </div>
 
-          <div className="flex justify-center mt-10 mb-4">
-            <button className="bg-green-400 rounded-md px-2 py-1 text-5xl">
+          <div className="flex justify-center md:mt-10 md:mb-4 my-4">
+            <button className="bg-green-400 rounded-md px-2 py-1 md:text-5xl text-base">
               Save
             </button>
           </div>

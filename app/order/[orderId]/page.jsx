@@ -8,7 +8,7 @@ export default function Test({ params }) {
       <div>
         <HeaderGuj />
       </div>
-      <div className="w=[95%]">
+      <div className="mx-4">
         <DetailForm orderId={params.orderId} />
       </div>
     </div>
