@@ -35,7 +35,7 @@ export default function HeaderGuj() {
 
       <div className="justify-self-center w-full text-white">
         <div className="flex flex-col items-center">
-          <p className="text-2xl white mb-4">Babukaka & Company</p>
+          <p className="text-2xl white mb-4">બાબુકાકા & કંપની </p>
           <div className="text-6xl white flex flex-col items-center">
             <div className="flex gap-8 font-bold">
               <p className="first-letter:text-[#F2B705]">રામકૃષ્ણ</p>

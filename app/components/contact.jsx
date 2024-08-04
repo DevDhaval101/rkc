@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import styles from "./contact.module.css";
+import styles from "./bgGredient.module.css";
 
 export default function Contact() {
   return (
