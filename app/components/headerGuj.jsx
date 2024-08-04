@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function HeaderGuj() {
   return (
     <header className="bg-[#262626] flex items-center px-2 py-1">
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center px-4">
         <Image
           src="/logo.png"
           width={700}

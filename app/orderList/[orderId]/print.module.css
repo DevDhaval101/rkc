@@ -1,0 +1,40 @@
+/* styles.css */
+
+@media print {
+  @page {
+    size: A4; /* Set the page size to A4 */
+    margin: 0.5cm; /* Adjust margins as needed */
+  }
+
+  /* Reset margins and padding for the body */
+  /* body {
+    margin: 0;
+    padding: 0;
+    font-size: 12pt; 
+  } */
+
+  /* Container to ensure content fits well */
+  .print_container {
+    width: 100%;
+    padding: 1cm; /* Add padding for better appearance */
+    box-sizing: border-box; /* Include padding in the element's total width */
+  }
+
+  /* Hide elements that should not appear in print */
+  .no-print {
+    display: none !important; /* Ensure elements with this class are hidden in print */
+  }
+
+  /* Style for headers and footers */
+  .print-header,
+  .print-footer {
+    width: 100%;
+    text-align: center;
+    padding: 0.5cm; /* Padding for header/footer */
+  }
+
+  /* Content styles */
+  .print-content {
+    padding: 1cm; /* Padding around the main content */
+  }
+}
