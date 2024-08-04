@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import getOrderList from "@/app/utils/getOrderList";
 import Link from "next/link";
 

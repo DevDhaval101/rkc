@@ -86,7 +86,7 @@ export async function deleteOrder(orderId){
   
   const result = await collection.findOneAndDelete({_id: new ObjectId(orderId)})
 
-  console.log(result)
+  // console.log(result)
 
   revalidatePath('/orderList')
 }

@@ -3,7 +3,7 @@
 import { deleteOrder } from "@/app/serverActions/actions";
 
 export default function DeleteBtn({ orderId }) {
-  console.log(orderId);
+  // console.log(orderId);
   return (
     <button
       className="bg-red-600 rounded-md px-2 py-1"
