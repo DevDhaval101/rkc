@@ -56,17 +56,12 @@ export default function EstimatePage() {
               />
             </div>
             <div className="flex justify-center">
-              <div>
-                <button className="w-content bg-green-400 border rounded-md px-2 py-1 md:text-xl text-base mt-2">
-                  Submit
-                </button>
+              <div className="mt-2">
+                <SubmitBtn name="Submit" />
               </div>
             </div>
           </div>
         </form>
-      </div>
-      <div>
-        <div className="border border-black"></div>
       </div>
     </div>
   );

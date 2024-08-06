@@ -3,6 +3,7 @@
 import { useFormState } from "react-dom";
 
 import FoodInput from "@/app/ui/foodInput";
+import SubmitBtn from "@/app/ui/submitBtn";
 
 import { saveOrderDetails } from "@/app/serverActions/actions";
 
@@ -255,9 +256,7 @@ export default function DetailForm({ orderId }) {
                 {state.message}
               </p>
             )}
-            <button className="bg-green-400 rounded-md px-2 py-1 md:text-5xl text-base">
-              Save
-            </button>
+            <SubmitBtn name={"Save"}/>
           </div>
         </form>
       </div>
