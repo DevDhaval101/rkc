@@ -13,7 +13,7 @@ export default function DisplayOrderDetail({ estimate }) {
       <div>
         <OrderMainPage estimate={estimate} />
       </div>
-      {orders.map((order, index) => (
+      {orders && orders.map((order, index) => (
         <div key={`${order}-${index}`}>
           <div>
             <OrderHeader order={order} estimate={estimate} />
