@@ -1,8 +1,16 @@
+"use client";
+
+import { useFormState } from "react-dom";
+
 import FoodInput from "@/app/ui/foodInput";
 
 import { saveOrderDetails } from "@/app/serverActions/actions";
 
-export default function DetailForm({orderId}) {
+export default function DetailForm({ orderId }) {
+  const [state, formAction] = useFormState(
+    saveOrderDetails.bind(null, orderId),
+    null
+  );
 
   return (
     <div className="mt-5 w-full">
@@ -10,7 +18,7 @@ export default function DetailForm({orderId}) {
         <p className="text-right">Order ID: {orderId}</p>
       </div>
       <div>
-        <form action={saveOrderDetails.bind(null, orderId)} className="flex flex-col gap-4">
+        <form action={formAction} className="flex flex-col gap-4">
           <div className="flex md:flex-row flex-col gap-5 justify-between">
             <FoodInput
               lable="ઓર્ડર તારીખ:"
@@ -237,7 +245,16 @@ export default function DetailForm({orderId}) {
             </ul>
           </div>
 
-          <div className="flex justify-center md:mt-10 md:mb-4 my-4">
+          <div className="flex flex-col gap-2 justify-center items-center md:mt-10 md:mb-4 my-4">
+            {state && (
+              <p
+                className={`${
+                  state.success ? "bg-green-300" : "bg-red-300"
+                } rounded-md px-2 py-1 w-fit`}
+              >
+                {state.message}
+              </p>
+            )}
             <button className="bg-green-400 rounded-md px-2 py-1 md:text-5xl text-base">
               Save
             </button>

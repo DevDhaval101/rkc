@@ -1,12 +1,10 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { revalidatePath } from 'next/cache'
+import { revalidatePath } from "next/cache";
 
 import connectToDB from "@/app/utils/connectToDB";
 import { ObjectId } from "mongodb";
-
-
 
 export async function submitAction(prevState, formData) {
   const data = Object.fromEntries(formData);
@@ -40,7 +38,7 @@ export async function submitAction(prevState, formData) {
   redirect(`/order/${orderId}`);
 }
 
-export async function saveOrderDetails(orderId, formData) {
+export async function saveOrderDetails(orderId, prevState, formData) {
   const data = {};
 
   for (let [key, value] of formData.entries()) {
@@ -62,31 +60,48 @@ export async function saveOrderDetails(orderId, formData) {
     }
   }
 
-  const client = await connectToDB();
+  try {
+    const client = await connectToDB();
 
-  const collection = client
-    .db(process.env.DB_NAME)
-    .collection(process.env.COLL_NAME);
+    const collection = client
+      .db(process.env.DB_NAME)
+      .collection(process.env.COLL_NAME);
 
-  const updatedValue = await collection.updateOne(
-    { _id: new ObjectId(orderId) },
-    { $push: { orders: filteredData } }
-  );
+    const updatedValue = await collection.updateOne(
+      { _id: new ObjectId(orderId) },
+      { $push: { orders: filteredData } }
+    );
 
-  // console.log(filteredData);
+    return {
+      success: true,
+      message: "Order saved successfully!",
+    };
+     
+    
+  } catch (error) {
+    console.log(error.message);
+
+    return {
+      success: false,
+      message: "Error occured while saving order please try again!",
+    };
+  }
+
+  // console.log(formData);
 }
 
-export async function deleteOrder(orderId){
-
+export async function deleteOrder(orderId) {
   const client = await connectToDB();
 
   const collection = client
     .db(process.env.DB_NAME)
     .collection(process.env.COLL_NAME);
-  
-  const result = await collection.findOneAndDelete({_id: new ObjectId(orderId)})
+
+  const result = await collection.findOneAndDelete({
+    _id: new ObjectId(orderId),
+  });
 
   // console.log(result)
 
-  revalidatePath('/orderList')
+  revalidatePath("/orderList");
 }
