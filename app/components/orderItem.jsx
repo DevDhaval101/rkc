@@ -58,5 +58,5 @@ export default function OrderItem({ order }) {
       );
     }
   
-    return list;
+    return <div>{list}</div>;
   }

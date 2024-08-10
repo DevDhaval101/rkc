@@ -1,0 +1,14 @@
+@media print {
+
+  .print_container {
+    width: 210mm;
+    height: 297mm;
+    page-break-after: auto;
+    page-break-before: auto;
+    font-size: 12pt;
+  }
+
+  .print_height{
+    height: 95%;
+  }
+}
