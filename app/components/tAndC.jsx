@@ -2,16 +2,17 @@ import HeaderGuj from "@/app/components/headerGuj";
 import OrderHeader from "@/app/components/orderHeader";
 
 import styles from "./bgGredient.module.css";
+import styles2 from "@/app/components/print.module.css";
 
 export default function TAndC({ order, estimate }) {
   return (
-    <div>
+    <div className={`${styles2.print_container} flex flex-col`}>
       <OrderHeader order={order} estimate={estimate} />
       <p className="text-2xl md:text-4xl border-t-[12px] border-[#F2B705] bg-[#262626] text-white pl-5 py-4">
         નિયમો
       </p>
       <div
-        className={`${styles.custom_bg} pl-5 md:pl-10 pt-4 pb-10 flex flex-col gap-10`}
+        className={`${styles.custom_bg} pl-5 md:pl-10 pt-4 pb-10 flex flex-col gap-10 flex-grow`}
       >
         <ul
           className={`list-outside list-disc marker:text-red-900 flex flex-col gap-2 text-base md:text-xl  font-bold `}
@@ -62,26 +63,26 @@ export default function TAndC({ order, estimate }) {
           </li>
           <li>પાર્ટી પ્લોટમાં આપવાની થતી ડિપોઝીટ પાર્ટીએ ચુકવવાની રહેશે.</li>
         </ul>
-        <div
-          className={`border-t-2 border-green-600 rounded-t-full w-full pt-20 flex flex-col gap-4 font-bold`}
-        >
-          <div className="flex flex-col gap-4 items-center">
-            <p className="border-4 border-orange-600 px-2 py-1 rounded-md text-xl md:text-2xl">
-              ઓફિસ - 1
-            </p>
-            <p className="text-xl md:text-2xl">
-              ઘર નંબર 46, હીરાનગર સોસાયટી, ત્રિકમનગર 2 ની સામે, રાધાકૃષ્ણ મંદિર
-              પાસે, એલ.એચ. રોડ, વરાછા, સુરત.
-            </p>
-          </div>
-          <div className="flex flex-col gap-4 items-center">
-            <p className="border-4 border-orange-600 px-2 py-1 rounded-md text-xl md:text-2xl">
-              ઓફિસ - 2
-            </p>
-            <p className="text-xl md:text-2xl">
-              6/223, મંછરપુરા, કોલસાવાડ, મરાઠી નિશાળની સામે, ગલેમંદિર સુરત. સુરત
-            </p>
-          </div>
+      </div>
+      <div
+        className={`border-t-2 border-green-600 flex flex-col gap-4 font-bold pb-5`}
+      >
+        <div className="flex flex-col gap-4 items-center pt-5">
+          <p className="border-4 border-orange-600 px-2 py-1 rounded-md text-xl md:text-2xl">
+            ઓફિસ - 1
+          </p>
+          <p className="text-xl md:text-2xl">
+            ઘર નંબર 46, હીરાનગર સોસાયટી, ત્રિકમનગર 2 ની સામે, રાધાકૃષ્ણ મંદિર
+            પાસે, એલ.એચ. રોડ, વરાછા, સુરત.
+          </p>
+        </div>
+        <div className="flex flex-col gap-4 items-center">
+          <p className="border-4 border-orange-600 px-2 py-1 rounded-md text-xl md:text-2xl">
+            ઓફિસ - 2
+          </p>
+          <p className="text-xl md:text-2xl">
+            6/223, મંછરપુરા, કોલસાવાડ, મરાઠી નિશાળની સામે, ગલેમંદિર સુરત. સુરત
+          </p>
         </div>
       </div>
     </div>
