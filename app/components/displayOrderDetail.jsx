@@ -21,7 +21,7 @@ export default function DisplayOrderDetail({ estimate }) {
               <div>
                 <OrderHeader order={order} estimate={estimate} />
               </div>
-              <div className={`pl-10 pb-10 ${styles.custom_bg} print:grow`}>
+              <div className={`md:pl-10 md:pb-10 pl-5 pb-5 ${styles.custom_bg} print:grow`}>
                 <OrderItem order={order} />
               </div>
             </div>

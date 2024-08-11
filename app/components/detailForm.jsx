@@ -69,10 +69,10 @@ export default function DetailForm({ orderId }) {
           </div>
           <div>
             <FoodInput
-              lable="ચાટ:"
+              lable="લાઈવ કાઉન્ટર:"
               bullet={"star"}
               fieldCount={4}
-              dbLabel="chaat"
+              dbLabel="liveCounter"
             />
           </div>
           <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
