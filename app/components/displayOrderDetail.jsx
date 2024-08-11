@@ -3,6 +3,9 @@ import ViewOrderInput from "@/app/ui/viewOrderInput";
 import OrderHeader from "@/app/components/orderHeader";
 import OrderItem from "@/app/components/orderItem";
 import OrderMainPage from "@/app/components/orderMainPage";
+import Extra from "@/app/components/extra";
+import TAndC from "@/app/components/tAndC";
+
 
 import styles from "./bgGredient.module.css";
 import styles2 from "@/app/components/print.module.css";
@@ -14,15 +17,27 @@ export default function DisplayOrderDetail({ estimate }) {
       <div>
         <OrderMainPage estimate={estimate} />
       </div>
-      <div className={`${styles2.print_container}`}>
+      <div>
         {orders &&
           orders.map((order, index) => (
-            <div key={`${order}-${index}`} className="print:h-full print:flex print:flex-col">
-              <div>
-                <OrderHeader order={order} estimate={estimate} />
+            <div key={`${order}-${index}`}>
+              <div
+                className={`${styles2.print_container} flex flex-col`}
+              >
+                <div>
+                  <OrderHeader order={order} estimate={estimate} />
+                </div>
+                <div
+                  className={`md:pl-10 md:pb-10 pl-5 pb-5 ${styles.custom_bg} flex-grow print:break-after-page`}
+                >
+                  <OrderItem order={order} />
+                </div>
               </div>
-              <div className={`md:pl-10 md:pb-10 pl-5 pb-5 ${styles.custom_bg} print:grow`}>
-                <OrderItem order={order} />
+              <div>
+                <Extra order={order} estimate={estimate}/>
+              </div>
+              <div>
+                <TAndC order={order} estimate={estimate}/>
               </div>
             </div>
           ))}

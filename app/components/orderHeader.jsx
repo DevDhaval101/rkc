@@ -16,18 +16,18 @@ export default function OrderHeader({ order, estimate }) {
           <ViewOrderInput tag="સમય:" value={order.orderTime} margin={true}/>
           <ViewOrderInput tag="માણસ:" value={order.guestCount} margin={true}/>
         </div> */}
-        <div className="flex border-b-2 border-black border-dotted pb-2 justify-between md:text-xl p-4">
-          <p className="flex gap-2">
+        <div className="flex border-b-2 border-black border-dotted pb-2 justify-between md:text-xl py-4 px-1">
+          <p className="flex gap-1">
             <span>ઓર્ડર તારીખ:</span>
-            {order.orderDate}
+            <span className="font-bold">{order.orderDate}</span>
           </p>
-          <p className="flex gap-2">
+          <p className="flex gap-1">
             <span>સમય:</span>
-            {order.orderTime}
+            <span className="font-bold">{order.orderTime}</span>
           </p>
-          <p className="flex gap-2">
+          <p className="flex gap-1">
             <span>માણસ:</span>
-            {order.guestCount}
+            <span className="font-bold">{order.guestCount}</span>
           </p>
         </div>
         <div className="md:text-xl text-base text-right pt-4 pr-2">

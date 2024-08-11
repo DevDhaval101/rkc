@@ -1,9 +1,9 @@
 export default function ViewOrderInput({ tag, value, margin }) {
   return (
-    <div className="md:text-2xl text-base flex">
+    <div className="md:text-2xl text-base flex gap-2">
       <span
         htmlFor=""
-        className={`${margin && "md:min-w-[200px] min-w-[110px]"} print:min-w-fit print:mx-2`}
+        className={`${margin && "md:min-w-[200px] min-w-[110px]"} print:min-w-fit print:mx-2 font-bold text-red-900`}
       >
         {tag}
       </span>

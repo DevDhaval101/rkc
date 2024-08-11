@@ -4,6 +4,7 @@ import { useFormState } from "react-dom";
 
 import FoodInput from "@/app/ui/foodInput";
 import SubmitBtn from "@/app/ui/submitBtn";
+import Checkbox from "@/app/ui/checkbox";
 
 import { saveOrderDetails } from "@/app/serverActions/actions";
 
@@ -246,6 +247,45 @@ export default function DetailForm({ orderId }) {
             </ul>
           </div>
 
+          <div>
+            <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
+              પાર્ટી ની જવાબદારી
+            </div>
+            <div className="flex flex-col gap-4 mt-4">
+              <Checkbox tag={"જગ્યા + લાઇટીંગ સામાન:"} name="spaceAndLight" />
+              <Checkbox tag={"કચરાપેટી:"} name="dustbin" />
+              <Checkbox tag={"વાપરવાનુું પાણી"} name="water" />
+              <Checkbox tag={"વૉશ બેસિન:"} name="washBasin" />
+              <Checkbox tag={"કાઉન્ટર ટેબલ:"} name="counterTable" />
+              <Checkbox tag={"ફાર્મ ની ડિપોઝિટ:"} name="farmDeposite" />
+              <FoodInput
+                lable="વધારાનુ ="
+                bullet={"star"}
+                fieldCount={1}
+                dbLabel="addtionalRespoParty"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
+              રસોયાની જવાબદારી
+            </div>
+            <div className="flex flex-col gap-4 mt-4">
+              <Checkbox tag={"વાસણ:"} name="crockery" />
+              <Checkbox tag={"ગેસ:"} name="gas" />
+              <Checkbox tag={"મજૂર:"} name="labour" />
+              <Checkbox tag={"પીરસવાનુ:"} name="serving" />
+              <Checkbox tag={"પીવાનુું પાણી ૨૦ લી.જગ:"} name="waterJug" />
+              <FoodInput
+                lable="વધારાનુ ="
+                bullet={"star"}
+                fieldCount={1}
+                dbLabel="addtionalRespoCaterer"
+              />
+            </div>
+          </div>
+
           <div className="flex flex-col gap-2 justify-center items-center md:mt-10 md:mb-4 my-4">
             {state && (
               <p
@@ -256,7 +296,7 @@ export default function DetailForm({ orderId }) {
                 {state.message}
               </p>
             )}
-            <SubmitBtn name={"Save"}/>
+            <SubmitBtn name={"Save"} />
           </div>
         </form>
       </div>
