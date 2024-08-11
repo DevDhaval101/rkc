@@ -1,5 +1,6 @@
 import HeaderGuj from "@/app/components/headerGuj";
 import OrderHeader from "@/app/components/orderHeader";
+import PrintBtn from "@/app/ui/printBtn";
 
 import styles from "./bgGredient.module.css";
 import styles2 from "@/app/components/print.module.css";
@@ -83,6 +84,7 @@ export default function TAndC({ order, estimate }) {
           <p className="text-xl md:text-2xl">
             6/223, મંછરપુરા, કોલસાવાડ, મરાઠી નિશાળની સામે, ગલેમંદિર સુરત. સુરત
           </p>
+          <PrintBtn />
         </div>
       </div>
     </div>
