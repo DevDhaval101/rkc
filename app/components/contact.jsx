@@ -20,8 +20,8 @@ export default function Contact() {
       </div>
       <div className="flex flex-col gap-2 font-medium uppercase">
         <p className="text-2xl flex gap-2 items-center">
-          Kiritbhai -<a href="tel:99259066509">992590 66509</a>
-          <a href="https://api.whatsapp.com/send?phone=9712336832">
+          Kiritbhai -<a href="tel:9925906650">99259 06650</a>
+          <a href="https://api.whatsapp.com/send?phone=9925906650">
             <Image
               src="/whatsapp.png"
               width={30}

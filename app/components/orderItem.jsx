@@ -88,7 +88,7 @@ export default function OrderItem({ order }) {
             {replaceTag[tag]}:{" "}
           </p>
           {
-            <div className="flex gap-2 flex-wrap flex-col">
+            <div className="flex gap-2 flex-wrap flex-col md:flex-row print:flex-row">
               {groupedTags[tag].map((item, index) => (
                 <p key={`${item} + ${index}`}>{`${index + 1}. ${item}`}</p>
               ))}
@@ -113,7 +113,7 @@ export default function OrderItem({ order }) {
       <div className="flex gap-2 flex-wrap md:flex-nowrap md:flex-col print:flex-col">
         {mainTags}
       </div>
-      <div className="text-2xl text-center mt-5 text-red-900 font-bold underline">
+      <div className="text-2xl mt-5 text-red-900 font-bold underline">
         ખાના ખજાના
       </div>
       <div>

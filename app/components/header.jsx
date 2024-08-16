@@ -1,37 +1,42 @@
 import Image from "next/image";
+import Link from 'next/link'
 
 export default function Header() {
   return (
     <header className="bg-[#262626] flex items-center px-2 py-1">
-      <div className="flex flex-col items-center">
-        <Image
-          src="/logo.png"
-          width={700}
-          height={700}
-          alt="logo"
-          className="md:w-[100px] w-[50px]"
-        ></Image>
+      <Link href={"/"}>
         <div className="flex flex-col items-center">
-          <div className="flex md:gap-4 gap-2 border-b-2 border-white justify-center w-full px-2">
-            <Image
-              src="/spoon.png"
-              alt="spoon logo"
-              width={100}
-              height={100}
-              className="md:w-8 w-4"
-            ></Image>
-            <p className="text-white md:text-6xl text-xl font-bold">RKC</p>
-            <Image
-              src="/spoon.png"
-              alt="spoon logo"
-              width={100}
-              height={100}
-              className="md:w-8 w-4"
-            ></Image>
+          <Image
+            src="/logo.png"
+            width={700}
+            height={700}
+            alt="logo"
+            className="md:w-[100px] w-[50px]"
+          ></Image>
+          <div className="flex flex-col items-center">
+            <div className="flex md:gap-4 gap-2 border-b-2 border-white justify-center w-full px-2">
+              <Image
+                src="/spoon.png"
+                alt="spoon logo"
+                width={100}
+                height={100}
+                className="md:w-8 w-4"
+              ></Image>
+              <p className="text-white md:text-6xl text-xl font-bold">RKC</p>
+              <Image
+                src="/spoon.png"
+                alt="spoon logo"
+                width={100}
+                height={100}
+                className="md:w-8 w-4"
+              ></Image>
+            </div>
+            <p className="text-white md:text-xl text-xs text-nowrap">
+              We Belive In Quality
+            </p>
           </div>
-          <p className="text-white md:text-xl text-xs text-nowrap">We Belive In Quality</p>
         </div>
-      </div>
+      </Link>
 
       <div className="justify-self-center w-full text-white">
         <div className="flex flex-col items-center">
