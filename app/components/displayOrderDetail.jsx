@@ -6,7 +6,6 @@ import OrderMainPage from "@/app/components/orderMainPage";
 import Extra from "@/app/components/extra";
 import TAndC from "@/app/components/tAndC";
 
-
 import styles from "./bgGredient.module.css";
 import styles2 from "@/app/components/print.module.css";
 
@@ -21,9 +20,7 @@ export default function DisplayOrderDetail({ estimate }) {
         {orders &&
           orders.map((order, index) => (
             <div key={`${order}-${index}`}>
-              <div
-                className={`${styles2.print_container} flex flex-col`}
-              >
+              <div className={`${styles2.print_container} flex flex-col`}>
                 <div>
                   <OrderHeader order={order} estimate={estimate} />
                 </div>
@@ -34,13 +31,13 @@ export default function DisplayOrderDetail({ estimate }) {
                 </div>
               </div>
               <div>
-                <Extra order={order} estimate={estimate}/>
-              </div>
-              <div>
-                <TAndC order={order} estimate={estimate}/>
+                <Extra order={order} estimate={estimate} />
               </div>
             </div>
           ))}
+        <div>
+          <TAndC />
+        </div>
       </div>
     </div>
   );

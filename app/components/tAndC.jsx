@@ -8,7 +8,8 @@ import styles2 from "@/app/components/print.module.css";
 export default function TAndC({ order, estimate }) {
   return (
     <div className={`${styles2.print_container} flex flex-col`}>
-      <OrderHeader order={order} estimate={estimate} />
+      <HeaderGuj />
+      {/* <OrderHeader order={order} estimate={estimate} /> */}
       <p className="text-2xl md:text-4xl border-t-[12px] border-[#F2B705] bg-[#262626] text-white pl-5 py-4">
         નિયમો
       </p>

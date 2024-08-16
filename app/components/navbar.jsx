@@ -8,10 +8,10 @@ export default function Navbar() {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="/estimate">Create Estimate</Link>
+          <Link href="/createEstimate">Create Estimate</Link>
         </li>
         <li>
-          <Link href="/orderList">Orders</Link>
+          <Link href="/orders/page/1">Orders</Link>
         </li>
       </ul>
     </nav>

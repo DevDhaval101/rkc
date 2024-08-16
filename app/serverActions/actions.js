@@ -105,3 +105,28 @@ export async function deleteOrder(orderId) {
 
   revalidatePath("/orderList");
 }
+
+export async function getOrderCount(){
+  const client = await connectToDB()
+
+  const collection = client.db(process.env.DB_NAME).collection(process.env.COLL_NAME)
+
+  const docCount = await collection.countDocuments()
+
+  return docCount
+}
+
+export async function getOrderByPageNum(pageNum, pageSize){
+
+  const skipVal = pageSize * (pageNum - 1)
+
+  const client = await connectToDB()
+
+  const collection = client.db(process.env.DB_NAME).collection(process.env.COLL_NAME)
+
+  const docCount = await collection.find({}).sort({_id: -1}).skip(skipVal).limit(pageSize).project({_id: 1, clientName: 1, clientMoNum: 1, orderDate: 1, eventAddress: 1 }).toArray()
+
+  return docCount
+}
+
+
