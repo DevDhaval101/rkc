@@ -1,4 +1,4 @@
-export default function FoodInput({ lable, dbLabel, bullet, fieldCount, max_w_label }) {
+export default function FoodInput({ lable, dbLabel, bullet, fieldCount, max_w_label, hide }) {
   return (
     <div className="flex gap-8 w-full">
       <div className="flex">
@@ -19,16 +19,16 @@ export default function FoodInput({ lable, dbLabel, bullet, fieldCount, max_w_la
         </label>
       </div>
       <div>
-        {fieldCount == 1 && <InputField lable={lable} dbLabel={dbLabel}/>}
+        {fieldCount == 1 && <InputField lable={lable} dbLabel={dbLabel} hide={hide}/>}
 
         {fieldCount > 1 && fieldCount < 3 && (
           <div>
             <ul className="flex md:flex-row flex-col md:gap-12 gap-2 list-decimal">
               <li>
-                <InputField lable={lable} dbLabel={dbLabel}/>
+                <InputField lable={lable} dbLabel={dbLabel} hide={hide}/>
               </li>
               <li>
-                <InputField lable={lable} dbLabel={dbLabel}/>
+                <InputField lable={lable} dbLabel={dbLabel} hide={hide}/>
               </li>
             </ul>
           </div>
@@ -39,18 +39,18 @@ export default function FoodInput({ lable, dbLabel, bullet, fieldCount, max_w_la
             <ul className="flex md:flex-row flex-col md:gap-12 gap-2 list-decimal">
               <div>
                 <li>
-                  <InputField lable={lable} dbLabel={dbLabel}/>
+                  <InputField lable={lable} dbLabel={dbLabel} hide={hide}/>
                 </li>
                 <li>
-                  <InputField lable={lable} dbLabel={dbLabel}/>
+                  <InputField lable={lable} dbLabel={dbLabel} hide={hide}/>
                 </li>
               </div>
               <div>
                 <li>
-                  <InputField lable={lable} dbLabel={dbLabel}/>
+                  <InputField lable={lable} dbLabel={dbLabel} hide={hide}/>
                 </li>
                 <li>
-                  <InputField lable={lable} dbLabel={dbLabel}/>
+                  <InputField lable={lable} dbLabel={dbLabel} hide={hide}/>
                 </li>
               </div>
             </ul>
@@ -61,12 +61,13 @@ export default function FoodInput({ lable, dbLabel, bullet, fieldCount, max_w_la
   );
 }
 
-function InputField({ dbLabel }) {
+function InputField({ dbLabel, hide }) {
   return (
     <input
       type="text"
       name={dbLabel}
       className="border-b-2 border-dotted border-black md:h-10 w-full"
+      disabled = {hide}
     />
   );
 }

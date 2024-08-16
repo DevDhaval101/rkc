@@ -31,7 +31,7 @@ export default function DisplayOrderDetail({ estimate }) {
                 </div>
               </div>
               <div>
-                <Extra order={order} estimate={estimate} />
+                {order.hasExtra && <Extra order={order} estimate={estimate} />}
               </div>
             </div>
           ))}

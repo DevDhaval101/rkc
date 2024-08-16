@@ -65,7 +65,7 @@ function CreateLineItem({ tag, value }) {
   return (
     <div className="flex gap-2">
       <p className="text-red-900 font-bold">{tag}</p>
-      <p>{value}</p>
+      <p>{value ? (value === 'on' ? "Yes" : value) : "No"}</p>
     </div>
   );
 }

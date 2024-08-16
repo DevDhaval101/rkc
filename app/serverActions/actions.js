@@ -35,7 +35,7 @@ export async function submitAction(prevState, formData) {
     };
   }
 
-  redirect(`/order/${orderId}`);
+  redirect(`/createOrder/${orderId}`);
 }
 
 export async function saveOrderDetails(orderId, prevState, formData) {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormState } from "react-dom";
+import { useState } from "react";
 
 import FoodInput from "@/app/ui/foodInput";
 import SubmitBtn from "@/app/ui/submitBtn";
@@ -13,6 +14,12 @@ export default function DetailForm({ orderId }) {
     saveOrderDetails.bind(null, orderId),
     null
   );
+
+  const [isFormHidden, setIsFormHidden] = useState(true);
+
+  function changeFormStatus() {
+    setIsFormHidden((prev) => !prev);
+  }
 
   return (
     <div className="mt-5 w-full">
@@ -190,101 +197,122 @@ export default function DetailForm({ orderId }) {
               dbLabel="sauce"
             />
           </div>
+          {!isFormHidden && (
+            <div>
+              <div>
+                <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
+                  Extra
+                </div>
+                <ul className="flex flex-col gap-4 mt-4">
+                  <li>
+                    <FoodInput
+                      lable="P.R.O ="
+                      bullet={"star"}
+                      fieldCount={1}
+                      dbLabel="pro"
+                      hide={isFormHidden}
+                    />
+                  </li>
+                  <li>
+                    <FoodInput
+                      lable="બોઇઝ ="
+                      bullet={"star"}
+                      fieldCount={1}
+                      dbLabel="boys"
+                      hide={isFormHidden}
+                    />
+                  </li>
+                  <li>
+                    <FoodInput
+                      lable="સર્વિસ માટે બહનો="
+                      bullet={"star"}
+                      fieldCount={1}
+                      dbLabel="servingStaff"
+                      hide={isFormHidden}
+                    />
+                  </li>
+                  <li>
+                    <FoodInput
+                      lable="ડેકોરેશન ="
+                      bullet={"star"}
+                      fieldCount={1}
+                      dbLabel="decoration"
+                      hide={isFormHidden}
+                    />
+                  </li>
+                  <li>
+                    <FoodInput
+                      lable="પાણી બોટલ 200ml ="
+                      bullet={"star"}
+                      fieldCount={1}
+                      dbLabel="waterBottle"
+                      hide={isFormHidden}
+                    />
+                  </li>
+                  <li>
+                    <FoodInput
+                      lable="વિદાઈ ચા ="
+                      bullet={"star"}
+                      fieldCount={1}
+                      dbLabel="FarewellTea"
+                      hide={isFormHidden}
+                    />
+                  </li>
+                </ul>
+              </div>
 
-          <div>
-            <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
-              Extra
-            </div>
-            <ul className="flex flex-col gap-4 mt-4">
-              <li>
-                <FoodInput
-                  lable="P.R.O ="
-                  bullet={"star"}
-                  fieldCount={1}
-                  dbLabel="pro"
-                />
-              </li>
-              <li>
-                <FoodInput
-                  lable="બોઇઝ ="
-                  bullet={"star"}
-                  fieldCount={1}
-                  dbLabel="boys"
-                />
-              </li>
-              <li>
-                <FoodInput
-                  lable="સર્વિસ માટે બહનો="
-                  bullet={"star"}
-                  fieldCount={1}
-                  dbLabel="servingStaff"
-                />
-              </li>
-              <li>
-                <FoodInput
-                  lable="ડેકોરેશન ="
-                  bullet={"star"}
-                  fieldCount={1}
-                  dbLabel="decoration"
-                />
-              </li>
-              <li>
-                <FoodInput
-                  lable="પાણી બોટલ 200ml ="
-                  bullet={"star"}
-                  fieldCount={1}
-                  dbLabel="waterBottle"
-                />
-              </li>
-              <li>
-                <FoodInput
-                  lable="વિદાઈ ચા ="
-                  bullet={"star"}
-                  fieldCount={1}
-                  dbLabel="FarewellTea"
-                />
-              </li>
-            </ul>
-          </div>
+              <div>
+                <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
+                  પાર્ટી ની જવાબદારી
+                </div>
+                <div className="flex flex-col gap-4 mt-4">
+                  <Checkbox
+                    tag={"જગ્યા + લાઇટીંગ સામાન:"}
+                    name="spaceAndLight"
+                  />
+                  <Checkbox tag={"કચરાપેટી:"} name="dustbin" />
+                  <Checkbox tag={"વાપરવાનુું પાણી"} name="water" />
+                  <Checkbox tag={"વૉશ બેસિન:"} name="washBasin" />
+                  <Checkbox tag={"કાઉન્ટર ટેબલ:"} name="counterTable" />
+                  <Checkbox tag={"ફાર્મ ની ડિપોઝિટ:"} name="farmDeposite" />
+                  <FoodInput
+                    lable="વધારાનુ ="
+                    bullet={"star"}
+                    fieldCount={1}
+                    dbLabel="addtionalRespoParty"
+                  />
+                </div>
+              </div>
 
-          <div>
-            <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
-              પાર્ટી ની જવાબદારી
+              <div>
+                <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
+                  રસોયાની જવાબદારી
+                </div>
+                <div className="flex flex-col gap-4 mt-4">
+                  <Checkbox tag={"વાસણ:"} name="crockery" />
+                  <Checkbox tag={"ગેસ:"} name="gas" />
+                  <Checkbox tag={"મજૂર:"} name="labour" />
+                  <Checkbox tag={"પીરસવાનુ:"} name="serving" />
+                  <Checkbox tag={"પીવાનુું પાણી ૨૦ લી.જગ:"} name="waterJug" />
+                  <FoodInput
+                    lable="વધારાનુ ="
+                    bullet={"star"}
+                    fieldCount={1}
+                    dbLabel="addtionalRespoCaterer"
+                  />
+                </div>
+                <input type="checkbox" name="hasExtra" checked hidden/>
+              </div>
             </div>
-            <div className="flex flex-col gap-4 mt-4">
-              <Checkbox tag={"જગ્યા + લાઇટીંગ સામાન:"} name="spaceAndLight" />
-              <Checkbox tag={"કચરાપેટી:"} name="dustbin" />
-              <Checkbox tag={"વાપરવાનુું પાણી"} name="water" />
-              <Checkbox tag={"વૉશ બેસિન:"} name="washBasin" />
-              <Checkbox tag={"કાઉન્ટર ટેબલ:"} name="counterTable" />
-              <Checkbox tag={"ફાર્મ ની ડિપોઝિટ:"} name="farmDeposite" />
-              <FoodInput
-                lable="વધારાનુ ="
-                bullet={"star"}
-                fieldCount={1}
-                dbLabel="addtionalRespoParty"
-              />
-            </div>
-          </div>
+          )}
 
-          <div>
-            <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
-              રસોયાની જવાબદારી
-            </div>
-            <div className="flex flex-col gap-4 mt-4">
-              <Checkbox tag={"વાસણ:"} name="crockery" />
-              <Checkbox tag={"ગેસ:"} name="gas" />
-              <Checkbox tag={"મજૂર:"} name="labour" />
-              <Checkbox tag={"પીરસવાનુ:"} name="serving" />
-              <Checkbox tag={"પીવાનુું પાણી ૨૦ લી.જગ:"} name="waterJug" />
-              <FoodInput
-                lable="વધારાનુ ="
-                bullet={"star"}
-                fieldCount={1}
-                dbLabel="addtionalRespoCaterer"
-              />
-            </div>
-          </div>
+          <button
+            className="px-2 py-1 border bg-black text-white"
+            onClick={changeFormStatus}
+            type="button"
+          >
+            {isFormHidden ? "Show More" : "Hide"}
+          </button>
 
           <div className="flex flex-col gap-2 justify-center items-center md:mt-10 md:mb-4 my-4">
             {state && (
