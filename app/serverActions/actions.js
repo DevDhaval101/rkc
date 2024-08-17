@@ -117,7 +117,6 @@ export async function getOrderCount(){
 }
 
 export async function getOrderByPageNum(pageNum, pageSize){
-
   const skipVal = pageSize * (pageNum - 1)
 
   const client = await connectToDB()

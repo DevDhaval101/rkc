@@ -20,7 +20,7 @@ export default function Contact() {
       </div>
       <div className="flex flex-col gap-2 font-medium uppercase">
         <p className="text-2xl flex gap-2 items-center">
-          Kiritbhai -<a href="tel:9925906650">99259 06650</a>
+          Kiritbhai :<a href="tel:+919925906650">+9199259 06650</a>
           <a href="https://api.whatsapp.com/send?phone=9925906650">
             <Image
               src="/whatsapp.png"
@@ -31,10 +31,10 @@ export default function Contact() {
           </a>
         </p>
         <p className="text-xl">
-          Sureshbhai - 99259 06645
+          Sureshbhai : +9199259 06645
         </p>
         <p className="text-xl flex gap-2 items-center">
-          Dhavalbhai -<a href="tel:9712336832">97123 36832</a>
+          Dhavalbhai :<a href="tel:+919712336832">+9197123 36832</a>
           <a href="https://api.whatsapp.com/send?phone=9712336832">
             <Image
               src="/whatsapp.png"

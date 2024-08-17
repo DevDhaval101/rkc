@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-        <div className="border-b-8 border-red-900 sticky top-0">
+        <div className="border-b-8 border-red-900 sticky top-0 print:hidden z-10">
           <Navbar />
         </div>
         {children}

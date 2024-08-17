@@ -12,6 +12,7 @@ export default function OrderItem({ order }) {
     "decoration",
     "waterBottle",
     "FarewellTea",
+    "spaceAndLight",
     "dustbin",
     "water",
     "washBasin",
@@ -23,7 +24,8 @@ export default function OrderItem({ order }) {
     "labour",
     "serving",
     "waterJug",
-    "addtionalRespoCaterer"
+    "addtionalRespoCaterer",
+    "hasExtra"
   ];
 
   const displayTagList = [

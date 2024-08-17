@@ -10,29 +10,30 @@ import HeaderGuj from "@/app/components/headerGuj";
 
 import { getOrderCount, getOrderByPageNum } from "@/app/serverActions/actions";
 
-export default async function OrderPage({ params }) {
+export default async function OrderPage({ params, searchParams }) {
   const { pageNum } = params;
-  const pageSize = 5
+  const { docPerPage } = searchParams;
 
-  // const orders = await getOrderList();
-  const orders = await getOrderByPageNum(pageNum, pageSize)
-  const docCount = await getOrderCount()
+  const pageSize = Number(docPerPage) || 10;
 
-  const maxPageNum = Math.ceil(Number(docCount)/pageSize)
-  // console.log(docCount)
 
-  const srNo = (pageNum - 1) * pageSize
+  const orders = await getOrderByPageNum(pageNum, pageSize);
+  const docCount = await getOrderCount();
+
+  const maxPageNum = Math.ceil(Number(docCount) / pageSize);
+
+  const srNo = (pageNum - 1) * pageSize;
 
   return (
     <div className="w-full">
       <div>
         <HeaderGuj />
       </div>
-      <div className="w-full mt-5 overflow-scroll md:text-base text-sm min-h-96">
+      <div className="w-full mt-5 overflow-scroll md:text-base text-sm min-h-96 relative pt-12 border border-red-500">
         <table className="w-[90%] mx-auto border-[#262626] border-2">
-          <thead className="border font-bold">
+          <thead className="border font-bold bg-[#262626] text-white">
             <tr className="border">
-              <th className="border">અનુક્રમ નંબર</th>
+              <th className="border md:p-4">અનુક્રમ નંબર</th>
               <th className="border">નામ</th>
               <th className="border">મોબાઇલ નંબર</th>
               <th className="border">ઓર્ડર તારીખ</th>
@@ -51,7 +52,7 @@ export default async function OrderPage({ params }) {
                 <td className="flex md:flex-row flex-col gap-2 items-center justify-center m-1">
                   <Link
                     href={`/orders/detail/${order._id}`}
-                    className="bg-blue-500 rounded-md px-2 py-1"
+                    className="bg-blue-500 rounded-md px-2 py-1 md:text-base text-xs"
                   >
                     View
                   </Link>
@@ -61,9 +62,9 @@ export default async function OrderPage({ params }) {
             ))}
           </tbody>
         </table>
-      </div>
-      <div>
-        <Pagination pageNum={pageNum} maxPageNum={maxPageNum}/>
+        <div className="mt-4">
+          <Pagination pageNum={pageNum} maxPageNum={maxPageNum} docPerPage={docPerPage}/>
+        </div>
       </div>
     </div>
   );
