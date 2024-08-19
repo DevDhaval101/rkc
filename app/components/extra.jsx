@@ -63,7 +63,7 @@ export default function Extra({ order, estimate }) {
 
 function CreateLineItem({ tag, value }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 print:text-xl">
       <p className="text-red-900 font-bold">{tag}</p>
       <p>{value ? (value === 'on' ? "Yes" : value) : "No"}</p>
     </div>

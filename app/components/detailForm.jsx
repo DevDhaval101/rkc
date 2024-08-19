@@ -125,7 +125,7 @@ export default function DetailForm({ orderId }) {
             />
           </div>
           <div className="border-b flex flex-col gap-4">
-            <FoodInput lable="ફરસાન:-" bullet={"star"} fieldCount={0} />
+            <FoodInput lable="ફરસાણ:-" bullet={"star"} fieldCount={0} />
             <div className="pl-10 flex flex-col gap-4">
               <FoodInput
                 lable="ગુજરાતી:"

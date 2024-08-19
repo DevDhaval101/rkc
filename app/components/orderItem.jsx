@@ -92,7 +92,7 @@ export default function OrderItem({ order }) {
           {
             <div className="flex gap-2 flex-wrap flex-col md:flex-row print:flex-row">
               {groupedTags[tag].map((item, index) => (
-                <p key={`${item} + ${index}`}>{`${index + 1}. ${item}`}</p>
+                <p key={`${item} + ${index}`} className="min-w-[200px]">{`${index + 1}. ${item}`}</p>
               ))}
             </div>
           }
@@ -111,11 +111,11 @@ export default function OrderItem({ order }) {
   }
 
   return (
-    <div className="pt-5 flex flex-col gap-4">
+    <div className="pt-5 flex flex-col gap-4 print:text-xl">
       <div className="flex gap-2 flex-wrap md:flex-nowrap md:flex-col print:flex-col">
         {mainTags}
       </div>
-      <div className="text-2xl mt-5 text-red-900 font-bold underline">
+      <div className="text-2xl print:text-3xl mt-5 text-red-900 font-bold underline">
         ખાના ખજાના
       </div>
       <div>

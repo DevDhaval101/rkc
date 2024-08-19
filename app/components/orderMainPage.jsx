@@ -13,7 +13,7 @@ export default function OrderMainPage({ estimate }) {
       <div className={styles2.print_height}>
         <form
           action=""
-          className={`flex flex-col gap-2 px-5 py-2 ${styles.custom_bg} ${styles2.print_height}`}
+          className={`flex flex-col gap-2 px-5 py-2 ${styles.custom_bg} ${styles2.print_height} pt-8 pb-8`}
         >
           <div>
             <ViewOrderInput
@@ -54,7 +54,7 @@ export default function OrderMainPage({ estimate }) {
             <div>
               <label
                 htmlFor=""
-                className="md:text-2xl text-base text-red-900 font-bold"
+                className="md:text-2xl text-base text-red-900 font-bold print:text-2xl"
               >
                 સ્થળે રહેનારના નામ:
               </label>
@@ -81,6 +81,20 @@ export default function OrderMainPage({ estimate }) {
                 margin={true}
               />
             </div>
+          </div>
+          <div>
+            <ViewOrderInput
+              tag="હસ્તક:"
+              value={estimate.referer}
+              margin={true}
+            />
+          </div>
+          <div>
+            <ViewOrderInput
+              tag="મોબાઇલ નંબર:"
+              value={estimate.refererMo}
+              margin={true}
+            />
           </div>
         </form>
       </div>

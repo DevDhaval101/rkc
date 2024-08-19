@@ -11,15 +11,15 @@ export default function Contact() {
           width={700}
           height={700}
           alt={"logo"}
-          className="md:w-[200px] w-[100px]"
+          className="md:w-[200px] w-[100px] print:w-[350px]"
         ></Image>
       </div>
-      <div className="flex md:gap-6 gap-2 md:text-6xl text-4xl font-bold">
+      <div className="flex md:gap-6 gap-2 md:text-6xl text-4xl font-bold print:text-8xl">
         <p className="first-letter:text-[#F20519]">રામકૃષ્ણ</p>
         <p className="first-letter:text-[#F20519]">કેટરર્સ</p>
       </div>
-      <div className="flex flex-col gap-2 font-medium uppercase">
-        <p className="text-2xl flex gap-2 items-center">
+      <div className="flex flex-col gap-2 font-medium uppercase print:mt-8 print:gap-4">
+        <p className="text-2xl flex gap-2 items-center print:text-4xl">
           Kiritbhai :<a href="tel:+919925906650">+9199259 06650</a>
           <a href="https://api.whatsapp.com/send?phone=9925906650">
             <Image
@@ -30,10 +30,10 @@ export default function Contact() {
             ></Image>
           </a>
         </p>
-        <p className="text-xl">
+        <p className="text-xl print:text-3xl">
           Sureshbhai : +9199259 06645
         </p>
-        <p className="text-xl flex gap-2 items-center">
+        <p className="text-xl flex gap-2 items-center print:text-3xl">
           Dhavalbhai :<a href="tel:+919712336832">+9197123 36832</a>
           <a href="https://api.whatsapp.com/send?phone=9712336832">
             <Image
