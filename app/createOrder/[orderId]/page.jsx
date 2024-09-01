@@ -1,8 +1,20 @@
 import DetailForm from "@/app/components/detailForm";
 import HeaderGuj from "@/app/components/headerGuj";
 
-export default function Test({ params }) {
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+import { redirect } from "next/navigation";
+
+export default async function Test({ params }) {
   // console.log(params);
+  const session = await getServerSession(authOptions);
+  console.log(session);
+
+  if (!session) {
+    redirect("/signin");
+  }
+
   return (
     <div>
       <div>

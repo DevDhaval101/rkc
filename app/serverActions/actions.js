@@ -6,6 +6,8 @@ import { revalidatePath } from "next/cache";
 import connectToDB from "@/app/utils/connectToDB";
 import { ObjectId } from "mongodb";
 
+import { headers } from 'next/headers'
+
 export async function submitAction(prevState, formData) {
   const data = Object.fromEntries(formData);
   let filteredData = {};
@@ -76,8 +78,6 @@ export async function saveOrderDetails(orderId, prevState, formData) {
       success: true,
       message: "Order saved successfully!",
     };
-     
-    
   } catch (error) {
     console.log(error.message);
 
@@ -106,26 +106,40 @@ export async function deleteOrder(orderId) {
   revalidatePath("/orderList");
 }
 
-export async function getOrderCount(){
-  const client = await connectToDB()
+export async function getOrderCount() {
+  const client = await connectToDB();
 
-  const collection = client.db(process.env.DB_NAME).collection(process.env.COLL_NAME)
+  const collection = client
+    .db(process.env.DB_NAME)
+    .collection(process.env.COLL_NAME);
 
-  const docCount = await collection.countDocuments()
+  const docCount = await collection.countDocuments();
 
-  return docCount
+  return docCount;
 }
 
-export async function getOrderByPageNum(pageNum, pageSize){
-  const skipVal = pageSize * (pageNum - 1)
+export async function getOrderByPageNum(pageNum, pageSize) {
+  const skipVal = pageSize * (pageNum - 1);
 
-  const client = await connectToDB()
+  const client = await connectToDB();
 
-  const collection = client.db(process.env.DB_NAME).collection(process.env.COLL_NAME)
+  const collection = client
+    .db(process.env.DB_NAME)
+    .collection(process.env.COLL_NAME);
 
-  const docCount = await collection.find({}).sort({_id: -1}).skip(skipVal).limit(pageSize).project({_id: 1, clientName: 1, clientMoNum: 1, orderDate: 1, eventAddress: 1 }).toArray()
+  const docCount = await collection
+    .find({})
+    .sort({ _id: -1 })
+    .skip(skipVal)
+    .limit(pageSize)
+    .project({
+      _id: 1,
+      clientName: 1,
+      clientMoNum: 1,
+      orderDate: 1,
+      eventAddress: 1,
+    })
+    .toArray();
 
-  return docCount
+  return docCount;
 }
-
-

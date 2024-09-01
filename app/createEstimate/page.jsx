@@ -12,8 +12,20 @@ import { useState } from "react";
 
 import FlashMessage from "@/app/components/FlashMessage";
 
+import { useSession } from "next-auth/react"
+
+import { redirect } from 'next/navigation'
+
 export default function EstimatePage() {
   const [state, formAction] = useFormState(submitAction, {});
+  // const router = useRouter()
+
+  const session = useSession()
+  console.log(session)
+
+  if(session.status === "unauthenticated"){
+    redirect('/signin')
+  }
 
   return (
     <div>

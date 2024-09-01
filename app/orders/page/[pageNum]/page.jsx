@@ -10,12 +10,21 @@ import HeaderGuj from "@/app/components/headerGuj";
 
 import { getOrderCount, getOrderByPageNum } from "@/app/serverActions/actions";
 
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
+
 export default async function OrderPage({ params, searchParams }) {
+  const session = await getServerSession(authOptions);
+  console.log(session);
+
+  if (!session) {
+    redirect("/signin");
+  }
   const { pageNum } = params;
   const { docPerPage } = searchParams;
 
   const pageSize = Number(docPerPage) || 10;
-
 
   const orders = await getOrderByPageNum(pageNum, pageSize);
   const docCount = await getOrderCount();
@@ -29,7 +38,7 @@ export default async function OrderPage({ params, searchParams }) {
       <div>
         <HeaderGuj />
       </div>
-      <div className="w-full mt-5 overflow-scroll md:text-base text-sm min-h-96 relative pt-12 border border-red-500">
+      <div className="w-full mt-5 overflow-scroll md:text-base text-sm min-h-96 relative pt-12">
         <table className="w-[90%] mx-auto border-[#262626] border-2">
           <thead className="border font-bold bg-[#262626] text-white">
             <tr className="border">
@@ -63,7 +72,11 @@ export default async function OrderPage({ params, searchParams }) {
           </tbody>
         </table>
         <div className="mt-4">
-          <Pagination pageNum={pageNum} maxPageNum={maxPageNum} docPerPage={docPerPage}/>
+          <Pagination
+            pageNum={pageNum}
+            maxPageNum={maxPageNum}
+            docPerPage={docPerPage}
+          />
         </div>
       </div>
     </div>
