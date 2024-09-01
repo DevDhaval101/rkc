@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 export default async function Test({ params }) {
   // console.log(params);
   const session = await getServerSession(authOptions);
-  console.log(session);
+  // console.log(session);
 
   if (!session) {
     redirect("/signin");

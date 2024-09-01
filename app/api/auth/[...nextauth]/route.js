@@ -26,7 +26,7 @@ const authOptions = {
           if (user) {
             const isMatched = await checkPassword(password, user.password);
             if (isMatched && user.isVerified) {
-              console.log('1. authorize')
+              // console.log('1. authorize')
               return {
                 name: user.name,
                 // pavan: "gupta",

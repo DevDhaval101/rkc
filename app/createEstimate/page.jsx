@@ -21,7 +21,7 @@ export default function EstimatePage() {
   // const router = useRouter()
 
   const session = useSession()
-  console.log(session)
+  // console.log(session)
 
   if(session.status === "unauthenticated"){
     redirect('/signin')
