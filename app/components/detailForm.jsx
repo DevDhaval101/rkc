@@ -9,7 +9,7 @@ import Checkbox from "@/app/ui/checkbox";
 
 import { saveOrderDetails } from "@/app/serverActions/actions";
 
-export default function DetailForm({ orderId }) {
+export default function DetailForm({ orderId, nosOfSubOrder }) {
   const [state, formAction] = useFormState(
     saveOrderDetails.bind(null, orderId),
     null
@@ -24,62 +24,64 @@ export default function DetailForm({ orderId }) {
   return (
     <div className="mt-5 w-full">
       <div>
-        <p className="text-right">Order ID: {orderId}</p>
+        <p className="text-right">
+          Order ID: {orderId}/{nosOfSubOrder + 1} {}
+        </p>
       </div>
       <div>
         <form action={formAction} className="flex flex-col gap-4">
           <div className="flex md:flex-row flex-col gap-5 justify-between">
             <FoodInput
               lable="ઓર્ડર તારીખ:"
-              bullet={"star"}
-              max_w_label={"200px"}
-              fieldCount={1}
+              bulletType={"star"}
+              maxWidth={"200px"}
+              nosOfField={1}
               dbLabel="orderDate"
             />
             <FoodInput
               lable="સમય:"
-              bullet={"star"}
-              max_w_label={"200px"}
-              fieldCount={1}
+              bulletType={"star"}
+              maxWidth={"200px"}
+              nosOfField={1}
               dbLabel="orderTime"
             />
             <FoodInput
               lable="માણસ:"
-              bullet={"star"}
-              max_w_label={"200px"}
-              fieldCount={1}
+              bulletType={"star"}
+              maxWidth={"200px"}
+              nosOfField={1}
               dbLabel="guestCount"
             />
           </div>
           <div>
             <FoodInput
               lable="વેલકમ જ્યુસ:"
-              bullet={"star"}
-              fieldCount={2}
+              bulletType={"star"}
+              nosOfField={2}
               dbLabel="wlcJuice"
             />
           </div>
           <div>
             <FoodInput
               lable="સ્ટાર્ટર:"
-              bullet={"star"}
-              fieldCount={2}
+              bulletType={"star"}
+              nosOfField={2}
               dbLabel="starters"
             />
           </div>
           <div>
             <FoodInput
               lable="સૂપ:"
-              bullet={"star"}
-              fieldCount={2}
+              bulletType={"star"}
+              nosOfField={2}
               dbLabel="soup"
             />
           </div>
           <div>
             <FoodInput
               lable="લાઈવ કાઉન્ટર:"
-              bullet={"star"}
-              fieldCount={4}
+              bulletType={"star"}
+              nosOfField={4}
               dbLabel="liveCounter"
             />
           </div>
@@ -88,24 +90,24 @@ export default function DetailForm({ orderId }) {
           </div>
 
           <div className="border-b-b flex flex-col gap-4">
-            <FoodInput lable="સ્વીટ:-" bullet={"star"} fieldCount={0} />
+            <FoodInput lable="સ્વીટ:-" bulletType={"star"} nosOfField={0} />
             <div className="pl-10 flex flex-col gap-4">
               <FoodInput
                 lable="લીકવિડ સ્વીટ:"
-                bullet={"arrow"}
-                fieldCount={1}
+                bulletType={"arrow"}
+                nosOfField={1}
                 dbLabel="liquidSweet"
               />
               <FoodInput
                 lable="સોલીડ સ્વીટ:"
-                bullet={"arrow"}
-                fieldCount={2}
+                bulletType={"arrow"}
+                nosOfField={2}
                 dbLabel="solidSweet"
               />
               <FoodInput
                 lable="લાઈવ સ્વીટ:"
-                bullet={"arrow"}
-                fieldCount={2}
+                bulletType={"arrow"}
+                nosOfField={2}
                 dbLabel="liveSweet"
               />
             </div>
@@ -113,47 +115,47 @@ export default function DetailForm({ orderId }) {
           <div className="border-b flex flex-col gap-4">
             <FoodInput
               lable="પૂરી/પરાઠા:"
-              bullet={"star"}
-              fieldCount={2}
+              bulletType={"star"}
+              nosOfField={2}
               dbLabel="puriParatha"
             />
             <FoodInput
               lable="રોટલી/નાન/કુલચા:"
-              bullet={"star"}
-              fieldCount={2}
+              bulletType={"star"}
+              nosOfField={2}
               dbLabel="rotiNanKulcha"
             />
           </div>
           <div className="border-b flex flex-col gap-4">
-            <FoodInput lable="ફરસાણ:-" bullet={"star"} fieldCount={0} />
+            <FoodInput lable="ફરસાણ:-" bulletType={"star"} nosOfField={0} />
             <div className="pl-10 flex flex-col gap-4">
               <FoodInput
                 lable="ગુજરાતી:"
-                bullet={"arrow"}
-                fieldCount={4}
+                bulletType={"arrow"}
+                nosOfField={4}
                 dbLabel="farsanGuj"
               />
               <FoodInput
                 lable="ચાઇનીઝ:"
-                bullet={"arrow"}
-                fieldCount={2}
+                bulletType={"arrow"}
+                nosOfField={2}
                 dbLabel="FaarnsanChi"
               />
             </div>
           </div>
           <div className="border-b flex flex-col gap-4">
-            <FoodInput lable="સબ્જી:-" bullet={"star"} fieldCount={0} />
+            <FoodInput lable="સબ્જી:-" bulletType={"star"} nosOfField={0} />
             <div className="pl-10 flex flex-col gap-4">
               <FoodInput
                 lable="ગુજરાતી શાક:"
-                bullet={"arrow"}
-                fieldCount={4}
+                bulletType={"arrow"}
+                nosOfField={4}
                 dbLabel="sabjiGuj"
               />
               <FoodInput
                 lable="પંજાબી શાક:"
-                bullet={"arrow"}
-                fieldCount={2}
+                bulletType={"arrow"}
+                nosOfField={2}
                 dbLabel="sabjiPan"
               />
             </div>
@@ -162,38 +164,38 @@ export default function DetailForm({ orderId }) {
           <div className="border-b flex flex-col gap-4">
             <FoodInput
               lable="દાળ/કઢી:"
-              bullet={"star"}
-              fieldCount={1}
+              bulletType={"star"}
+              nosOfField={1}
               dbLabel="curry"
             />
             <FoodInput
               lable="રાઈસ:"
-              bullet={"star"}
-              fieldCount={1}
+              bulletType={"star"}
+              nosOfField={1}
               dbLabel="rice"
             />
             <FoodInput
               lable="પાપડ/પાપડી:"
-              bullet={"star"}
-              fieldCount={1}
+              bulletType={"star"}
+              nosOfField={1}
               dbLabel="papad"
             />
             <FoodInput
               lable="છાસ:"
-              bullet={"star"}
-              fieldCount={1}
+              bulletType={"star"}
+              nosOfField={1}
               dbLabel="chaas"
             />
             <FoodInput
               lable="સલાડ/સંભારો:"
-              bullet={"star"}
-              fieldCount={4}
+              bulletType={"star"}
+              nosOfField={4}
               dbLabel="salad"
             />
             <FoodInput
               lable="ચટણી/સોસ:"
-              bullet={"star"}
-              fieldCount={2}
+              bulletType={"star"}
+              nosOfField={2}
               dbLabel="sauce"
             />
           </div>
@@ -207,8 +209,8 @@ export default function DetailForm({ orderId }) {
                   <li>
                     <FoodInput
                       lable="P.R.O ="
-                      bullet={"star"}
-                      fieldCount={1}
+                      bulletType={"star"}
+                      nosOfField={1}
                       dbLabel="pro"
                       hide={isFormHidden}
                     />
@@ -216,8 +218,8 @@ export default function DetailForm({ orderId }) {
                   <li>
                     <FoodInput
                       lable="બોઇઝ ="
-                      bullet={"star"}
-                      fieldCount={1}
+                      bulletType={"star"}
+                      nosOfField={1}
                       dbLabel="boys"
                       hide={isFormHidden}
                     />
@@ -225,8 +227,8 @@ export default function DetailForm({ orderId }) {
                   <li>
                     <FoodInput
                       lable="સર્વિસ માટે બહનો="
-                      bullet={"star"}
-                      fieldCount={1}
+                      bulletType={"star"}
+                      nosOfField={1}
                       dbLabel="servingStaff"
                       hide={isFormHidden}
                     />
@@ -234,8 +236,8 @@ export default function DetailForm({ orderId }) {
                   <li>
                     <FoodInput
                       lable="ડેકોરેશન ="
-                      bullet={"star"}
-                      fieldCount={1}
+                      bulletType={"star"}
+                      nosOfField={1}
                       dbLabel="decoration"
                       hide={isFormHidden}
                     />
@@ -243,8 +245,8 @@ export default function DetailForm({ orderId }) {
                   <li>
                     <FoodInput
                       lable="પાણી બોટલ 200ml ="
-                      bullet={"star"}
-                      fieldCount={1}
+                      bulletType={"star"}
+                      nosOfField={1}
                       dbLabel="waterBottle"
                       hide={isFormHidden}
                     />
@@ -252,8 +254,8 @@ export default function DetailForm({ orderId }) {
                   <li>
                     <FoodInput
                       lable="વિદાઈ ચા ="
-                      bullet={"star"}
-                      fieldCount={1}
+                      bulletType={"star"}
+                      nosOfField={1}
                       dbLabel="FarewellTea"
                       hide={isFormHidden}
                     />
@@ -277,8 +279,8 @@ export default function DetailForm({ orderId }) {
                   <Checkbox tag={"ફાર્મ ની ડિપોઝિટ:"} name="farmDeposite" />
                   <FoodInput
                     lable="વધારાનુ ="
-                    bullet={"star"}
-                    fieldCount={1}
+                    bulletType={"star"}
+                    nosOfField={1}
                     dbLabel="addtionalRespoParty"
                   />
                 </div>
@@ -296,12 +298,12 @@ export default function DetailForm({ orderId }) {
                   <Checkbox tag={"પીવાનુું પાણી ૨૦ લી.જગ:"} name="waterJug" />
                   <FoodInput
                     lable="વધારાનુ ="
-                    bullet={"star"}
-                    fieldCount={1}
+                    bulletType={"star"}
+                    nosOfField={1}
                     dbLabel="addtionalRespoCaterer"
                   />
                 </div>
-                <input type="checkbox" name="hasExtra" checked hidden/>
+                <input type="checkbox" name="hasExtra" defaultChecked hidden />
               </div>
             </div>
           )}

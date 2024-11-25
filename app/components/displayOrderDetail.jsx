@@ -16,7 +16,9 @@ export default function DisplayOrderDetail({ estimate }) {
   const orders = estimate.orders;
   return (
     <div>
-      <div className={`${styles2.print_container} ${styles.custom_bg} flex flex-col pb-4`}>
+      <div
+        className={`${styles2.print_container} ${styles.custom_bg} flex flex-col pb-4`}
+      >
         <div>
           <OrderFrontPage />
         </div>
@@ -33,7 +35,11 @@ export default function DisplayOrderDetail({ estimate }) {
             <div key={`${order}-${index}`}>
               <div className={`${styles2.print_container} flex flex-col`}>
                 <div>
-                  <OrderHeader order={order} estimate={estimate} />
+                  <OrderHeader
+                    order={order}
+                    estimate={estimate}
+                    subOrderId={index}
+                  />
                 </div>
                 <div
                   className={`md:pl-10 md:pb-10 pl-5 pb-5 ${styles.custom_bg} flex-grow print:break-after-page`}
@@ -42,7 +48,9 @@ export default function DisplayOrderDetail({ estimate }) {
                 </div>
               </div>
               <div>
-                {order.hasExtra && <Extra order={order} estimate={estimate} />}
+                {order.hasExtra && (
+                  <Extra order={order} estimate={estimate} subOrderId={index} />
+                )}
               </div>
             </div>
           ))}

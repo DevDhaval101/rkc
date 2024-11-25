@@ -63,7 +63,13 @@ export default async function OrderPage({ params, searchParams }) {
                     href={`/orders/detail/${order._id}`}
                     className="bg-blue-500 rounded-md px-2 py-1 md:text-base text-xs"
                   >
-                    View
+                    Print
+                  </Link>
+                  <Link
+                    href={`/updateOrder/${order._id}`}
+                    className="bg-orange-500 rounded-md px-2 py-1 md:text-base text-xs"
+                  >
+                    Update
                   </Link>
                   <DeleteBtn orderId={String(order._id)} />
                 </td>

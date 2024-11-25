@@ -3,7 +3,7 @@ import HeaderGuj from "@/app/components/headerGuj";
 
 import styles from "./bgGredient.module.css";
 
-export default function OrderHeader({ order, estimate }) {
+export default function OrderHeader({ order, estimate, subOrderId }) {
   const orderId = String(estimate._id);
   return (
     <div>
@@ -31,7 +31,7 @@ export default function OrderHeader({ order, estimate }) {
           </p>
         </div>
         <div className="md:text-xl text-base text-right pt-4 pr-2">
-          Order ID: {orderId.slice(orderId.length - 6, orderId.length)}
+          Order ID: {`${orderId.slice(orderId.length - 6, orderId.length)}/${subOrderId + 1}`}
         </div>
       </div>
     </div>

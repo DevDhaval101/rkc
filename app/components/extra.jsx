@@ -5,10 +5,10 @@ import styles from "./bgGredient.module.css";
 import styles2 from "@/app/components/print.module.css";
 
 
-export default function Extra({ order, estimate }) {
+export default function Extra({ order, estimate, subOrderId }) {
   return (
     <div className={`flex flex-col ${styles2.print_container} h-full`}>
-      <OrderHeader order={order} estimate={estimate}/>
+      <OrderHeader order={order} estimate={estimate} subOrderId={subOrderId}/>
       <div className={`${styles.custom_bg} flex flex-col gap-4 flex-grow py-4`}>
         <div className="pl-5 md:pl-10">
           <p className="text-black text-2xl font-bold pb-2 underline">Extra</p>

@@ -1,0 +1,513 @@
+"use client";
+
+import { useFormState } from "react-dom";
+import { useState, useEffect } from "react";
+
+import FoodInput from "@/app/updateOrder/[orderId]/foodInput";
+import SubmitBtn from "@/app/ui/submitBtn";
+import Checkbox from "@/app/updateOrder/[orderId]/checkbox";
+import DeleteBtn from "@/app/updateOrder/[orderId]/deleteBtn";
+
+import { updateOrderDetails } from "@/app/serverActions/actions";
+
+export default function DetailForm({ orderId }) {
+  const [subOrderId, setSubOrderId] = useState(0);
+  const [subOrder, setSubOrder] = useState();
+
+  const [state, formAction] = useFormState(
+    updateOrderDetails.bind(null, { orderId, subOrderId }),
+    null
+  );
+
+  function changeFormStatus() {
+    setIsFormHidden((prev) => !prev);
+  }
+
+  useEffect(() => {
+    async function getSubOrder() {
+      const res = await fetch(
+        `http://localhost:3000/api/subOrder?orderId=${orderId}&&subOrderId=${subOrderId}`
+      );
+
+      const data = await res.json();
+      // console.log(data);
+      setSubOrder(data);
+    }
+
+    getSubOrder();
+  }, [subOrderId]);
+
+  function subOrderNoHandler(e) {
+    // console.log(e.target.value);
+    setSubOrderId(e.target.value);
+  }
+
+  // Function to update the state of specific items
+  function updateHandler(field, e) {
+    // console.log("New Value", e.target.checked);
+
+    const [name, id] = field.split("-"); // Extract name and id
+
+    // Ensure the order state is updated correctly based on field name
+    setSubOrder((prevOrder) => {
+      if (Array.isArray(prevOrder[name])) {
+        const updatedField = [...prevOrder[name]]; // Clone the array
+        updatedField[parseInt(id) - 1].item = e.target.value; // Update the specific item
+
+        return {
+          ...prevOrder,
+          [name]: updatedField, // Set the updated array back into the order
+        };
+      } else {
+        return {
+          ...prevOrder,
+          [name]: e.target.value, // Set the updated array back into the order
+        };
+      }
+    });
+  }
+
+  function checkboxHandler(field, e) {
+    // console.log("Field", e.target.name);
+
+    // console.log("New Value", e.target.checked);
+
+    // Ensure the order state is updated correctly based on field name
+    setSubOrder((prevOrder) => {
+      return {
+        ...prevOrder,
+        [field]: e.target.checked, // Set the updated array back into the order
+      };
+    });
+  }
+
+  return (
+    <>
+      {subOrder ? (
+        <div className="mt-5 w-full">
+          <div className="flex mr-0 items-center gap-2 justify-end">
+            <p className="w-fit">Order ID: {orderId}</p>
+            <span>
+              {`${subOrder.totalSubOrder} / `}
+              <input
+                type="number"
+                value={Number(subOrderId)}
+                max={Number(subOrder.totalSubOrder - 1)}
+                min="0"
+                onChange={(e) => subOrderNoHandler(e)}
+                className="border border-black rounded-md px-2 py-1"
+              />
+            </span>
+          </div>
+          <div>
+            <form action={formAction} className="flex flex-col gap-4">
+              <div className="flex md:flex-row flex-col gap-5 justify-between">
+                <FoodInput
+                  lable="ઓર્ડર તારીખ:"
+                  bulletType={"star"}
+                  maxWidth={"200px"}
+                  nosOfField={1}
+                  dbLabel="orderDate"
+                  value={subOrder.orderDate}
+                  updateHandler={updateHandler}
+                />
+                <FoodInput
+                  lable="સમય:"
+                  bulletType={"star"}
+                  maxWidth={"200px"}
+                  nosOfField={1}
+                  dbLabel="orderTime"
+                  value={subOrder.orderTime}
+                  updateHandler={updateHandler}
+                />
+                <FoodInput
+                  lable="માણસ:"
+                  bulletType={"star"}
+                  maxWidth={"200px"}
+                  nosOfField={1}
+                  dbLabel="guestCount"
+                  value={subOrder.guestCount}
+                  updateHandler={updateHandler}
+                />
+              </div>
+              <div>
+                <FoodInput
+                  lable="વેલકમ જ્યુસ:"
+                  bulletType={"star"}
+                  nosOfField={2}
+                  dbLabel="wlcJuice"
+                  value={subOrder.wlcJuice}
+                  updateHandler={updateHandler}
+                />
+              </div>
+              <div>
+                <FoodInput
+                  lable="સ્ટાર્ટર:"
+                  bulletType={"star"}
+                  nosOfField={2}
+                  dbLabel="starters"
+                  value={subOrder.starters}
+                  updateHandler={updateHandler}
+                />
+              </div>
+              <div>
+                <FoodInput
+                  lable="સૂપ:"
+                  bulletType={"star"}
+                  nosOfField={2}
+                  dbLabel="soup"
+                  value={subOrder.soup}
+                  updateHandler={updateHandler}
+                />
+              </div>
+              <div>
+                <FoodInput
+                  lable="લાઈવ કાઉન્ટર:"
+                  bulletType={"star"}
+                  nosOfField={4}
+                  dbLabel="liveCounter"
+                  value={subOrder.liveCounter}
+                  updateHandler={updateHandler}
+                />
+              </div>
+              <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
+                ખાના ખજાના
+              </div>
+
+              <div className="border-b-b flex flex-col gap-4">
+                <FoodInput lable="સ્વીટ:-" bulletType={"star"} nosOfField={0} />
+                <div className="pl-10 flex flex-col gap-4">
+                  <FoodInput
+                    lable="લીકવિડ સ્વીટ:"
+                    bulletType={"arrow"}
+                    nosOfField={1}
+                    dbLabel="liquidSweet"
+                    value={subOrder.liquidSweet}
+                    updateHandler={updateHandler}
+                  />
+                  <FoodInput
+                    lable="સોલીડ સ્વીટ:"
+                    bulletType={"arrow"}
+                    nosOfField={2}
+                    dbLabel="solidSweet"
+                    value={subOrder.solidSweet}
+                    updateHandler={updateHandler}
+                  />
+                  <FoodInput
+                    lable="લાઈવ સ્વીટ:"
+                    bulletType={"arrow"}
+                    nosOfField={2}
+                    dbLabel="liveSweet"
+                    value={subOrder.liveSweet}
+                    updateHandler={updateHandler}
+                  />
+                </div>
+              </div>
+              <div className="border-b flex flex-col gap-4">
+                <FoodInput
+                  lable="પૂરી/પરાઠા:"
+                  bulletType={"star"}
+                  nosOfField={2}
+                  dbLabel="puriParatha"
+                  value={subOrder.puriParatha}
+                  updateHandler={updateHandler}
+                />
+                <FoodInput
+                  lable="રોટલી/નાન/કુલચા:"
+                  bulletType={"star"}
+                  nosOfField={2}
+                  dbLabel="rotiNanKulcha"
+                  value={subOrder.rotiNanKulcha}
+                  updateHandler={updateHandler}
+                />
+              </div>
+              <div className="border-b flex flex-col gap-4">
+                <FoodInput lable="ફરસાણ:-" bulletType={"star"} nosOfField={0} />
+                <div className="pl-10 flex flex-col gap-4">
+                  <FoodInput
+                    lable="ગુજરાતી:"
+                    bulletType={"arrow"}
+                    nosOfField={4}
+                    dbLabel="farsanGuj"
+                    value={subOrder.farsanGuj}
+                    updateHandler={updateHandler}
+                  />
+                  <FoodInput
+                    lable="ચાઇનીઝ:"
+                    bulletType={"arrow"}
+                    nosOfField={2}
+                    dbLabel="FaarnsanChi"
+                    value={subOrder.FaarnsanChi}
+                    updateHandler={updateHandler}
+                  />
+                </div>
+              </div>
+              <div className="border-b flex flex-col gap-4">
+                <FoodInput lable="સબ્જી:-" bulletType={"star"} nosOfField={0} />
+                <div className="pl-10 flex flex-col gap-4">
+                  <FoodInput
+                    lable="ગુજરાતી શાક:"
+                    bulletType={"arrow"}
+                    nosOfField={4}
+                    dbLabel="sabjiGuj"
+                    value={subOrder.sabjiGuj}
+                    updateHandler={updateHandler}
+                  />
+                  <FoodInput
+                    lable="પંજાબી શાક:"
+                    bulletType={"arrow"}
+                    nosOfField={2}
+                    dbLabel="sabjiPan"
+                    value={subOrder.sabjiPan}
+                    updateHandler={updateHandler}
+                  />
+                </div>
+              </div>
+
+              <div className="border-b flex flex-col gap-4">
+                <FoodInput
+                  lable="દાળ/કઢી:"
+                  bulletType={"star"}
+                  nosOfField={1}
+                  dbLabel="curry"
+                  value={subOrder.curry}
+                  updateHandler={updateHandler}
+                />
+                <FoodInput
+                  lable="રાઈસ:"
+                  bulletType={"star"}
+                  nosOfField={1}
+                  dbLabel="rice"
+                  value={subOrder.rice}
+                  updateHandler={updateHandler}
+                />
+                <FoodInput
+                  lable="પાપડ/પાપડી:"
+                  bulletType={"star"}
+                  nosOfField={1}
+                  dbLabel="papad"
+                  value={subOrder.papad}
+                  updateHandler={updateHandler}
+                />
+                <FoodInput
+                  lable="છાસ:"
+                  bulletType={"star"}
+                  nosOfField={1}
+                  dbLabel="chaas"
+                  value={subOrder.chaas}
+                  updateHandler={updateHandler}
+                />
+                <FoodInput
+                  lable="સલાડ/સંભારો:"
+                  bulletType={"star"}
+                  nosOfField={4}
+                  dbLabel="salad"
+                  value={subOrder.salad}
+                  updateHandler={updateHandler}
+                />
+                <FoodInput
+                  lable="ચટણી/સોસ:"
+                  bulletType={"star"}
+                  nosOfField={2}
+                  dbLabel="sauce"
+                  value={subOrder.sauce}
+                  updateHandler={updateHandler}
+                />
+              </div>
+
+              <div>
+                <div>
+                  <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
+                    Extra
+                  </div>
+                  <ul className="flex flex-col gap-4 mt-4">
+                    <li>
+                      <FoodInput
+                        lable="P.R.O ="
+                        bulletType={"star"}
+                        nosOfField={1}
+                        dbLabel="pro"
+                        value={subOrder.pro}
+                        updateHandler={updateHandler}
+                      />
+                    </li>
+                    <li>
+                      <FoodInput
+                        lable="બોઇઝ ="
+                        bulletType={"star"}
+                        nosOfField={1}
+                        dbLabel="boys"
+                        value={subOrder.boys}
+                        updateHandler={updateHandler}
+                      />
+                    </li>
+                    <li>
+                      <FoodInput
+                        lable="સર્વિસ માટે બહનો="
+                        bulletType={"star"}
+                        nosOfField={1}
+                        dbLabel="servingStaff"
+                        value={subOrder.servingStaff}
+                        updateHandler={updateHandler}
+                      />
+                    </li>
+                    <li>
+                      <FoodInput
+                        lable="ડેકોરેશન ="
+                        bulletType={"star"}
+                        nosOfField={1}
+                        dbLabel="decoration"
+                        value={subOrder.decoration}
+                        updateHandler={updateHandler}
+                      />
+                    </li>
+                    <li>
+                      <FoodInput
+                        lable="પાણી બોટલ 200ml ="
+                        bulletType={"star"}
+                        nosOfField={1}
+                        dbLabel="waterBottle"
+                        value={subOrder.waterBottle}
+                        updateHandler={updateHandler}
+                      />
+                    </li>
+                    <li>
+                      <FoodInput
+                        lable="વિદાઈ ચા ="
+                        bulletType={"star"}
+                        nosOfField={1}
+                        dbLabel="FarewellTea"
+                        value={subOrder.FarewellTea}
+                        updateHandler={updateHandler}
+                      />
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
+                    પાર્ટી ની જવાબદારી
+                  </div>
+                  <div className="flex flex-col gap-4 mt-4">
+                    <Checkbox
+                      tag={"જગ્યા + લાઇટીંગ સામાન:"}
+                      name="spaceAndLight"
+                      value={subOrder.spaceAndLight}
+                      checkboxHandler={checkboxHandler}
+                    />
+                    <Checkbox
+                      tag={"કચરાપેટી:"}
+                      name="dustbin"
+                      value={subOrder.dustbin}
+                      checkboxHandler={checkboxHandler}
+                    />
+                    <Checkbox
+                      tag={"વાપરવાનુું પાણી"}
+                      name="water"
+                      value={subOrder.water}
+                      checkboxHandler={checkboxHandler}
+                    />
+                    <Checkbox
+                      tag={"વૉશ બેસિન:"}
+                      name="washBasin"
+                      value={subOrder.washBasin}
+                      checkboxHandler={checkboxHandler}
+                    />
+                    <Checkbox
+                      tag={"કાઉન્ટર ટેબલ:"}
+                      name="counterTable"
+                      value={subOrder.counterTable}
+                      checkboxHandler={checkboxHandler}
+                    />
+                    <Checkbox
+                      tag={"ફાર્મ ની ડિપોઝિટ:"}
+                      name="farmDeposite"
+                      value={subOrder.farmDeposite}
+                      checkboxHandler={checkboxHandler}
+                    />
+                    <FoodInput
+                      lable="વધારાનુ ="
+                      bulletType={"star"}
+                      nosOfField={1}
+                      dbLabel="addtionalRespoParty"
+                      value={subOrder.addtionalRespoParty}
+                      updateHandler={updateHandler}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="md:text-5xl text-xl text-center py-1 bg-red-900 text-white">
+                    રસોયાની જવાબદારી
+                  </div>
+                  <div className="flex flex-col gap-4 mt-4">
+                    <Checkbox
+                      tag={"વાસણ:"}
+                      name="crockery"
+                      value={subOrder.crockery}
+                      checkboxHandler={checkboxHandler}
+                    />
+                    <Checkbox
+                      tag={"ગેસ:"}
+                      name="gas"
+                      value={subOrder.gas}
+                      checkboxHandler={checkboxHandler}
+                    />
+                    <Checkbox
+                      tag={"મજૂર:"}
+                      name="labour"
+                      value={subOrder.labour}
+                      checkboxHandler={checkboxHandler}
+                    />
+                    <Checkbox
+                      tag={"પીરસવાનુ:"}
+                      name="serving"
+                      value={subOrder.serving}
+                      checkboxHandler={checkboxHandler}
+                    />
+                    <Checkbox
+                      tag={"પીવાનુું પાણી ૨૦ લી.જગ:"}
+                      name="waterJug"
+                      value={subOrder.waterJug}
+                      checkboxHandler={checkboxHandler}
+                    />
+                    <FoodInput
+                      lable="વધારાનુ ="
+                      bulletType={"star"}
+                      nosOfField={1}
+                      dbLabel="addtionalRespoCaterer"
+                      value={subOrder.addtionalRespoCaterer}
+                      updateHandler={updateHandler}
+                    />
+                    <input
+                      type="checkbox"
+                      name="hasExtra"
+                      defaultChecked
+                      hidden
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2 justify-center items-center md:mt-10 md:mb-4 my-4">
+                {state && (
+                  <p
+                    className={`${
+                      state.success ? "bg-green-300" : "bg-red-300"
+                    } rounded-md px-2 py-1 w-fit`}
+                  >
+                    {state.message}
+                  </p>
+                )}
+                <SubmitBtn name={"Update"} />
+                <DeleteBtn orderId={orderId} subOrderId={subOrderId} />
+              </div>
+            </form>
+          </div>
+        </div>
+      ) : (
+        <div>No data Found</div>
+      )}
+    </>
+  );
+}
