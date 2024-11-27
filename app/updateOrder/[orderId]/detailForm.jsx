@@ -25,13 +25,23 @@ export default function DetailForm({ orderId }) {
 
   useEffect(() => {
     async function getSubOrder() {
+      setSubOrder({});
+      setIsLoading(true);
+
       const res = await fetch(
-        `http://localhost:3000/api/subOrder?orderId=${orderId}&&subOrderId=${subOrderId}`
+        `/api/subOrder?orderId=${orderId}&&subOrderId=${subOrderId}`
       );
 
       const data = await res.json();
       // console.log(data);
-      setSubOrder(data);
+
+      setTimeout(() => {
+        setSubOrder(data);
+        setIsLoading(false);
+      }, 3000);
+
+      // setSubOrder(data);
+      // setIsLoading(false);
     }
 
     getSubOrder();
@@ -81,24 +91,27 @@ export default function DetailForm({ orderId }) {
     });
   }
 
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <>
-      {subOrder ? (
-        <div className="mt-5 w-full">
-          <div className="flex mr-0 items-center gap-2 justify-end">
-            <p className="w-fit">Order ID: {orderId}</p>
-            <span>
-              {`${subOrder.totalSubOrder} / `}
-              <input
-                type="number"
-                value={Number(subOrderId)}
-                max={Number(subOrder.totalSubOrder - 1)}
-                min="0"
-                onChange={(e) => subOrderNoHandler(e)}
-                className="border border-black rounded-md px-2 py-1"
-              />
-            </span>
-          </div>
+      {/* From server when subOrderId is out of range it still returns 
+      totalSubOrder so instead subOrder, subOrder.orderDate is being use to render order */}
+      <div className="mt-5 w-full">
+        <div className="flex mr-0 items-center gap-2 justify-end border-b border-red-900 mb-4 pb-4">
+          <p className="w-fit">Order ID: {orderId}</p>
+          <span>
+            {`${subOrder?.totalSubOrder || 0} / `}
+            <input
+              type="number"
+              value={Number(subOrderId)}
+              max={Number(subOrder?.totalSubOrder - 1) || 0}
+              min="0"
+              onChange={(e) => subOrderNoHandler(e)}
+              className="border border-black rounded-md px-2 py-1"
+            />
+          </span>
+        </div>
+        {subOrder?.orderDate && (
           <div>
             <form action={formAction} className="flex flex-col gap-4">
               <div className="flex md:flex-row flex-col gap-5 justify-between">
@@ -504,9 +517,11 @@ export default function DetailForm({ orderId }) {
               </div>
             </form>
           </div>
-        </div>
-      ) : (
-        <div>No data Found</div>
+        )}
+      </div>
+      {isLoading && <div className="text-center">Loading....</div>}
+      {!isLoading && !subOrder.orderDate && (
+        <div className="text-center">No Data Found</div>
       )}
     </>
   );
