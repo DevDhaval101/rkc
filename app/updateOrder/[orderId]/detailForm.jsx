@@ -35,13 +35,8 @@ export default function DetailForm({ orderId }) {
       const data = await res.json();
       // console.log(data);
 
-      setTimeout(() => {
-        setSubOrder(data);
-        setIsLoading(false);
-      }, 3000);
-
-      // setSubOrder(data);
-      // setIsLoading(false);
+      setSubOrder(data);
+      setIsLoading(false);
     }
 
     getSubOrder();
