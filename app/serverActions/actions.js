@@ -42,17 +42,19 @@ export async function submitAction(prevState, formData) {
 
 export async function saveOrderDetails(orderId, prevState, formData) {
   const data = {};
+  // console.log(formData)
 
   for (let [key, value] of formData.entries()) {
+    // console.log(key, value)
     const newKey = key.split("-")[0];
-    if (data[newKey]) {
+    if (newKey in data) {
       if (Array.isArray(data[newKey])) {
         data[newKey].push(value);
       } else {
         data[newKey] = [data[newKey], value];
       }
     } else {
-      data[newKey] = value;
+      data[newKey] = !value ? "" : value;
     }
   }
   let filteredData = {};
@@ -62,6 +64,7 @@ export async function saveOrderDetails(orderId, prevState, formData) {
       filteredData[key] = data[key];
     }
   }
+  // console.log(filteredData);
 
   try {
     const client = await connectToDB();
@@ -107,7 +110,7 @@ export async function updateOrderDetails(orderData, prevState, formData) {
 
   for (let [key, value] of formData.entries()) {
     const newKey = key.split("-")[0];
-    if (data[newKey]) {
+    if (newKey in data) {
       if (Array.isArray(data[newKey])) {
         data[newKey].push(value);
       } else {
@@ -181,28 +184,44 @@ export async function deleteOrder(orderId) {
 }
 
 export async function deleteSubOrder(orderId, subOrderId) {
-  const client = await connectToDB();
+  // console.log('OrderId: ', orderId)
+  // console.log('subOrderId: ', subOrderId)
 
+  const client = await connectToDB();
   const collection = client
     .db(process.env.DB_NAME)
     .collection(process.env.COLL_NAME);
 
-  const result = await collection.findOne({_id: new ObjectId(orderId) })
+  const result = await collection.findOne({ _id: new ObjectId(orderId) });
 
-  const orders = result.orders.splice(subOrderId, 1)
+  const orderList = result.orders;
+  const nosOfOrder = result.orders.length;
+
+  let newOrderList;
+
+  if (nosOfOrder <= 1) {
+    // console.log("Loop 1");
+    newOrderList = []
+  } else {
+    // console.log("Loop 2");
+    orderList.splice(subOrderId, 1);
+    newOrderList = orderList
+  }
+
+  // console.log(newOrderList);
 
   const updatedValue = await collection.updateOne(
     { _id: new ObjectId(orderId) },
     {
       $set: {
-        orders: orders
+        orders: newOrderList,
       },
     }
   );
 
-  // console.log(result)
+  // console.log(updatedValue);
 
-  redirect("http://localhost:3000/orders/page/1");
+  redirect("/orders/page/1");
 }
 
 export async function getOrderCount() {

@@ -12,7 +12,7 @@ import { updateOrderDetails } from "@/app/serverActions/actions";
 
 export default function DetailForm({ orderId }) {
   const [subOrderId, setSubOrderId] = useState(0);
-  const [subOrder, setSubOrder] = useState();
+  const [subOrder, setSubOrder] = useState({});
 
   const [state, formAction] = useFormState(
     updateOrderDetails.bind(null, { orderId, subOrderId }),
@@ -28,15 +28,19 @@ export default function DetailForm({ orderId }) {
       setSubOrder({});
       setIsLoading(true);
 
-      const res = await fetch(
-        `/api/subOrder?orderId=${orderId}&&subOrderId=${subOrderId}`
-      );
+      try {
+        const res = await fetch(
+          `/api/subOrder?orderId=${orderId}&&subOrderId=${subOrderId}`
+        );
 
-      const data = await res.json();
-      // console.log(data);
-
-      setSubOrder(data);
-      setIsLoading(false);
+        const data = await res.json();
+        // console.log(data);
+        setSubOrder(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     getSubOrder();
@@ -57,8 +61,9 @@ export default function DetailForm({ orderId }) {
     setSubOrder((prevOrder) => {
       if (Array.isArray(prevOrder[name])) {
         const updatedField = [...prevOrder[name]]; // Clone the array
-        updatedField[parseInt(id) - 1].item = e.target.value; // Update the specific item
+        updatedField[parseInt(id) - 1] = e.target.value; // Update the specific item
 
+        console.log(updatedField, id);
         return {
           ...prevOrder,
           [name]: updatedField, // Set the updated array back into the order
@@ -106,7 +111,7 @@ export default function DetailForm({ orderId }) {
             />
           </span>
         </div>
-        {subOrder?.orderDate && (
+        {Object.keys(subOrder).length > 0 && (
           <div>
             <form action={formAction} className="flex flex-col gap-4">
               <div className="flex md:flex-row flex-col gap-5 justify-between">
@@ -515,7 +520,7 @@ export default function DetailForm({ orderId }) {
         )}
       </div>
       {isLoading && <div className="text-center">Loading....</div>}
-      {!isLoading && !subOrder.orderDate && (
+      {!isLoading && (!Object.keys(subOrder).length > 1) && (
         <div className="text-center">No Data Found</div>
       )}
     </>
