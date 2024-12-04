@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import getOrderList from "@/app/utils/getOrderList";
 import Link from "next/link";
 
-import DeleteBtn from "@/app/ui/deleteBtn";
+import DeleteBtn from "@/app/orders/page/[pageNum]/deleteBtn";
 import Pagination from "@/app/ui/pagination";
 
 import HeaderGuj from "@/app/components/headerGuj";
@@ -13,6 +13,9 @@ import { getOrderCount, getOrderByPageNum } from "@/app/serverActions/actions";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+
+import { AiFillEye } from "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai";
 
 export default async function OrderPage({ params, searchParams }) {
   const session = await getServerSession(authOptions);
@@ -59,17 +62,13 @@ export default async function OrderPage({ params, searchParams }) {
                 <td className="border">{order.orderDate}</td>
                 <td className="border">{order.eventAddress}</td>
                 <td className="flex md:flex-row flex-col gap-2 items-center justify-center m-1">
-                  <Link
-                    href={`/orders/detail/${order._id}`}
-                    className="bg-blue-500 rounded-md px-2 py-1 md:text-base text-xs"
-                  >
-                    Print
+                  <Link href={`/orders/detail/${order._id}`}>
+                    <AiFillEye color="rgb(59, 139, 246)" size="1.5rem" />
                   </Link>
                   <Link
                     href={`/updateOrder/${order._id}`}
-                    className="bg-orange-500 rounded-md px-2 py-1 md:text-base text-xs"
                   >
-                    Update
+                    <AiFillEdit color="rgb(249, 115, 22)" size="1.5rem" />
                   </Link>
                   <DeleteBtn orderId={String(order._id)} />
                 </td>
