@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import DetailForm from "@/app/updateOrder/[orderId]/detailForm";
 import HeaderGuj from "@/app/components/headerGuj";
 

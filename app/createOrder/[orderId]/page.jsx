@@ -43,9 +43,9 @@ async function getNumOfSubOrder(orderId) {
       _id: new ObjectId(orderId),
     });
 
-    const nosOfSubOrder = result.orders.length
+    const nosOfSubOrder = result.orders?.length || 0
 
-    console.log('nosOfSubOrder:', nosOfSubOrder)
+    // console.log('nosOfSubOrder:', nosOfSubOrder)
 
     return nosOfSubOrder;
   } catch (error) {

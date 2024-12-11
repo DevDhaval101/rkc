@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"; // defaults to auto
+
 import connectToDB from "@/app/utils/connectToDB";
 import { ObjectId } from "mongodb";
 
@@ -8,7 +10,6 @@ export async function GET(request) {
 
   // console.log("orderId", orderId)
   // console.log("subOrderId", subOrderId)
-
 
   let subOrder;
   let totalSubOrder;
@@ -22,21 +23,21 @@ export async function GET(request) {
 
     const result = await collection.findOne({ _id: new ObjectId(orderId) });
 
-    subOrder = result.orders[subOrderId];
-    totalSubOrder = result.orders.length;
+    subOrder = result.orders ? result.orders[subOrderId] : 0;
+    totalSubOrder = result.orders ? result.orders.length : 0;
 
     // console.log(subOrder)
-
   } catch (error) {
     console.log(error);
-    return {
+    return Response.json({
       error: true,
       message: "Error occured",
-    };
+    });
   }
 
   return Response.json({
     ...subOrder,
-    totalSubOrder
+    totalSubOrder,
+    error: false,
   });
 }

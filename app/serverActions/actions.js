@@ -73,9 +73,24 @@ export async function saveOrderDetails(orderId, prevState, formData) {
       .db(process.env.DB_NAME)
       .collection(process.env.COLL_NAME);
 
+    // test code
+    const checkOrder = await collection.find({});
+    let updateOperation;
+    if (checkOrder.orders) {
+      // console.log("2. order exists");
+      updateOperation = { $push: { orders: filteredData } };
+    } else {
+      // console.log("1. 1st order");
+      updateOperation = {
+        $set: {
+          orders: [filteredData],
+        },
+      };
+    }
+
     const updatedValue = await collection.updateOne(
       { _id: new ObjectId(orderId) },
-      { $push: { orders: filteredData } }
+      updateOperation
     );
 
     if (updatedValue.acknowledged && updatedValue.modifiedCount === 1) {
@@ -194,34 +209,39 @@ export async function deleteSubOrder(orderId, subOrderId) {
 
   const result = await collection.findOne({ _id: new ObjectId(orderId) });
 
-  const orderList = result.orders;
-  const nosOfOrder = result.orders.length;
+  // console.log(`Deleting Order: ${orderId} / ${subOrderId}`);
 
-  let newOrderList;
+  let newOrders;
 
-  if (nosOfOrder <= 1) {
-    // console.log("Loop 1");
-    newOrderList = []
+  if (result.orders.length > 1) {
+    // console.log("order > 1");
+    newOrders = [...result.orders].splice(subOrderId, 1);
   } else {
-    // console.log("Loop 2");
-    orderList.splice(subOrderId, 1);
-    newOrderList = orderList
+    // console.log("order <= 1");
+    newOrders = null;
   }
-
-  // console.log(newOrderList);
 
   const updatedValue = await collection.updateOne(
     { _id: new ObjectId(orderId) },
-    {
-      $set: {
-        orders: newOrderList,
-      },
-    }
+    { $set: { orders: newOrders } },
+    { returnDocument: "after" }
   );
 
-  // console.log(updatedValue);
+  // console.log("Updated Document:", updatedValue);
 
-  redirect("/orders/page/1");
+  if (updatedValue.acknowledged && updatedValue.modifiedCount === 1) {
+    return {
+      success: true,
+      message: "Order deleted successfully!",
+    };
+  }else {
+    return {
+      success: false,
+      message: "An internal error occured updating an order",
+    };
+  }
+
+  // redirect("/orders/page/1");
 }
 
 export async function getOrderCount() {

@@ -27,7 +27,7 @@ export default function SignIn() {
       redirect: false,
     });
 
-    console.log(res);
+    // console.log(res);
 
     if (res.error) {
       setError(res.error);
