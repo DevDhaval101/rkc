@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormState } from "react-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import FoodInput from "@/app/ui/foodInput";
 import SubmitBtn from "@/app/ui/submitBtn";
@@ -15,11 +15,25 @@ export default function DetailForm({ orderId, nosOfSubOrder }) {
     null
   );
 
+  const [notification, setNotification] = useState(state);
+
   const [isFormHidden, setIsFormHidden] = useState(true);
 
   function changeFormStatus() {
     setIsFormHidden((prev) => !prev);
   }
+
+  useEffect(() => {
+    // console.log('visible?')
+    setNotification(state);
+  }, [state]); // Whenever `state` changes, update `notification`
+
+  // UseEffect to celar notification
+  useEffect(() => {
+    setTimeout(() => {
+      setNotification(null); // Nullify notification after 3 seconds
+    }, 3000);
+  }, [state]);
 
   return (
     <div className="mt-5 w-full">
@@ -317,19 +331,21 @@ export default function DetailForm({ orderId, nosOfSubOrder }) {
           </button>
 
           <div className="flex flex-col gap-2 justify-center items-center md:mt-10 md:mb-4 my-4">
-            {state && (
-              <p
-                className={`${
-                  state.success ? "bg-green-300" : "bg-red-300"
-                } rounded-md px-2 py-1 w-fit`}
-              >
-                {state.message}
-              </p>
-            )}
             <SubmitBtn name={"Save"} />
           </div>
         </form>
       </div>
+      {notification && (
+        <div className="flex justify-self-center mb-4 fixed top-14 left-[50%] -translate-x-1/2 z-50">
+          <p
+            className={`${
+              notification.success ? "bg-green-300" : "bg-red-300"
+            } rounded-md px-2 py-1 w-fit`}
+          >
+            {notification.message}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
