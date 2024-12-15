@@ -20,6 +20,8 @@ export default function DetailForm({ orderId }) {
     null
   );
 
+  const [notification, setNotification] = useState(state);
+
   function changeFormStatus() {
     setIsFormHidden((prev) => !prev);
   }
@@ -46,6 +48,18 @@ export default function DetailForm({ orderId }) {
 
     getSubOrder();
   }, [subOrderId]);
+
+  useEffect(() => {
+    // console.log('visible?')
+    setNotification(state);
+  }, [state]); // Whenever `state` changes, update `notification`
+
+  // UseEffect to celar notification
+  useEffect(() => {
+    setTimeout(() => {
+      setNotification(null); // Nullify notification after 3 seconds
+    }, 3000);
+  }, [state]);
 
   function subOrderNoHandler(e) {
     // console.log(e.target.value);
@@ -519,15 +533,6 @@ export default function DetailForm({ orderId }) {
                 </div>
 
                 <div className="flex flex-col gap-2 justify-center items-center md:mt-10 md:mb-4 my-4">
-                  {state && (
-                    <p
-                      className={`${
-                        state.success ? "bg-green-300" : "bg-red-300"
-                      } rounded-md px-2 py-1 w-fit`}
-                    >
-                      {state.message}
-                    </p>
-                  )}
                   <SubmitBtn name={"Update"} />
                 </div>
               </form>
@@ -535,6 +540,17 @@ export default function DetailForm({ orderId }) {
             </div>
           </div>
         )}
+      {notification && (
+        <div className="flex justify-self-center mb-4 fixed top-14 left-[50%] -translate-x-1/2 z-50">
+          <p
+            className={`${
+              notification.success ? "bg-green-300" : "bg-red-300"
+            } rounded-md px-2 py-1 w-fit`}
+          >
+            {notification.message}
+          </p>
+        </div>
+      )}
       {isLoading && <div className="text-center">Loading....</div>}
       {!isLoading && !Object.keys(subOrder).length > 1 && (
         <div className="text-center">No Data Found</div>
