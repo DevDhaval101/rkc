@@ -213,13 +213,15 @@ export async function deleteSubOrder(orderId, subOrderId) {
   const result = await collection.findOne({ _id: new ObjectId(orderId) });
 
   // console.log(`Deleting Order: ${orderId} / ${subOrderId}`);
+  // console.log(result)
 
   let newOrders;
 
-  if (result.orders.length > 1) {
-    // console.log("order > 1");
+  if (result.orders?.length > 1) {
+    // console.log("order > 1", `Order Before ${result.orders.length}`);
     newOrders = [...result.orders];
-    newOrders.splice(subOrderId, 1);
+    newOrders.splice(subOrderId - 1, 1);
+    // console.log(`Order After ${newOrders.length}`);
   } else {
     // console.log("order <= 1");
     newOrders = null;
