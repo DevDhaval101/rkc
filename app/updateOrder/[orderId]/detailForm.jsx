@@ -35,7 +35,7 @@ export default function DetailForm({ orderId }) {
         );
 
         const data = await res.json();
-        console.log(data);
+        // console.log("DATA", data);
         setSubOrder(data);
       } catch (error) {
         console.log(error);

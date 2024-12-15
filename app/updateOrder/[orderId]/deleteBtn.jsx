@@ -17,7 +17,7 @@ export default function DeleteBtn({ orderId, subOrderId }) {
       try {
         // Call the server action to delete the sub-order
         const result = await deleteSubOrder(orderId, subOrderId);
-        console.log(result);
+        // console.log(result);
 
         // Update the state with the result
         setState(result);

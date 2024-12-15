@@ -74,8 +74,11 @@ export async function saveOrderDetails(orderId, prevState, formData) {
       .collection(process.env.COLL_NAME);
 
     // test code
-    const checkOrder = await collection.find({});
+    const checkOrder = await collection.findOne({_id: new ObjectId(orderId)});
+    // console.log("ORDER", checkOrder)
+
     let updateOperation;
+
     if (checkOrder.orders) {
       // console.log("2. order exists");
       updateOperation = { $push: { orders: filteredData } };
@@ -215,7 +218,8 @@ export async function deleteSubOrder(orderId, subOrderId) {
 
   if (result.orders.length > 1) {
     // console.log("order > 1");
-    newOrders = [...result.orders].splice(subOrderId, 1);
+    newOrders = [...result.orders];
+    newOrders.splice(subOrderId, 1);
   } else {
     // console.log("order <= 1");
     newOrders = null;
