@@ -157,7 +157,7 @@ export async function updateOrderDetails(orderData, prevState, formData) {
       { _id: new ObjectId(orderId) },
       {
         $set: {
-          [`orders.${subOrderId}`]: data,
+          [`orders.${subOrderId - 1}`]: data,
         },
       }
     );
