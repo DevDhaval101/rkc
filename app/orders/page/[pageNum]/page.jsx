@@ -16,6 +16,7 @@ import { redirect } from "next/navigation";
 
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEdit } from "react-icons/ai";
+import { AiTwotonePlusCircle } from "react-icons/ai";
 
 export default async function OrderPage({ params, searchParams }) {
   const session = await getServerSession(authOptions);
@@ -69,6 +70,9 @@ export default async function OrderPage({ params, searchParams }) {
                     <Link href={`/updateOrder/${order._id}`}>
                       <AiFillEdit color="rgb(249, 115, 22)" size="1.5rem" />
                     </Link>
+                    <Link href={`/createOrder/${order._id}`}>
+                      <AiTwotonePlusCircle size="1.5rem" />
+                    </Link>
                     <DeleteBtn orderId={String(order._id)} />
                   </td>
                 </tr>
@@ -88,7 +92,7 @@ export default async function OrderPage({ params, searchParams }) {
         <div className="flex flex-col gap-4 justify-self-center items-center justify-center  w-fit mt-8">
           <p className="px-2 py-1 bg-[#F2B705] rounded-md">No order found</p>
           <Link
-            href={'/createEstimate'}
+            href={"/createEstimate"}
             className="text-[#262626] w-fit border-b-4 border-b-[#F2B705] border-dotted"
           >
             Create Estimate &rarr;
