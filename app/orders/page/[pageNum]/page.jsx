@@ -41,49 +41,60 @@ export default async function OrderPage({ params, searchParams }) {
       <div>
         <HeaderGuj />
       </div>
-      <div className="w-full mt-5 overflow-scroll md:text-base text-sm min-h-96 relative pt-12">
-        <table className="w-[90%] mx-auto border-[#262626] border-2">
-          <thead className="border font-bold bg-[#262626] text-white">
-            <tr className="border">
-              <th className="border md:p-4">અનુક્રમ નંબર</th>
-              <th className="border">નામ</th>
-              <th className="border">મોબાઇલ નંબર</th>
-              <th className="border">ઓર્ડર તારીખ</th>
-              <th className="border">પ્રસંગનુ સરનામુ</th>
-              <th className="border">CTA</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order, index) => (
-              <tr className="border" key={order._id}>
-                <td className="border text-center">{srNo + index + 1}</td>
-                <td className="border">{order.clientName}</td>
-                <td className="border">{order.clientMoNum}</td>
-                <td className="border">{order.orderDate}</td>
-                <td className="border">{order.eventAddress}</td>
-                <td className="flex md:flex-row flex-col gap-2 items-center justify-center m-1">
-                  <Link href={`/orders/detail/${order._id}`}>
-                    <AiFillEye color="rgb(59, 139, 246)" size="1.5rem" />
-                  </Link>
-                  <Link
-                    href={`/updateOrder/${order._id}`}
-                  >
-                    <AiFillEdit color="rgb(249, 115, 22)" size="1.5rem" />
-                  </Link>
-                  <DeleteBtn orderId={String(order._id)} />
-                </td>
+      {orders.length > 0 && (
+        <div className="w-full mt-5 overflow-scroll md:text-base text-sm min-h-96 relative pt-12">
+          <table className="w-[90%] mx-auto border-[#262626] border-2">
+            <thead className="border font-bold bg-[#262626] text-white">
+              <tr className="border">
+                <th className="border md:p-4">અનુક્રમ નંબર</th>
+                <th className="border">નામ</th>
+                <th className="border">મોબાઇલ નંબર</th>
+                <th className="border">ઓર્ડર તારીખ</th>
+                <th className="border">પ્રસંગનુ સરનામુ</th>
+                <th className="border">CTA</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="mt-4">
-          <Pagination
-            pageNum={pageNum}
-            maxPageNum={maxPageNum}
-            docPerPage={docPerPage}
-          />
+            </thead>
+            <tbody>
+              {orders.map((order, index) => (
+                <tr className="border" key={order._id}>
+                  <td className="border text-center">{srNo + index + 1}</td>
+                  <td className="border">{order.clientName}</td>
+                  <td className="border">{order.clientMoNum}</td>
+                  <td className="border">{order.orderDate}</td>
+                  <td className="border">{order.eventAddress}</td>
+                  <td className="flex md:flex-row flex-col gap-2 items-center justify-center m-1">
+                    <Link href={`/orders/detail/${order._id}`}>
+                      <AiFillEye color="rgb(59, 139, 246)" size="1.5rem" />
+                    </Link>
+                    <Link href={`/updateOrder/${order._id}`}>
+                      <AiFillEdit color="rgb(249, 115, 22)" size="1.5rem" />
+                    </Link>
+                    <DeleteBtn orderId={String(order._id)} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="mt-4">
+            <Pagination
+              pageNum={pageNum}
+              maxPageNum={maxPageNum}
+              docPerPage={docPerPage}
+            />
+          </div>
         </div>
-      </div>
+      )}
+      {orders.length < 1 && (
+        <div className="flex flex-col gap-4 justify-self-center items-center justify-center  w-fit mt-8">
+          <p className="px-2 py-1 bg-[#F2B705] rounded-md">No order found</p>
+          <Link
+            href={'/createEstimate'}
+            className="text-[#262626] w-fit border-b-4 border-b-[#F2B705] border-dotted"
+          >
+            Create Estimate &rarr;
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
