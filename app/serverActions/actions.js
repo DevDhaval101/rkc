@@ -74,7 +74,7 @@ export async function saveOrderDetails(orderId, prevState, formData) {
       .collection(process.env.COLL_NAME);
 
     // test code
-    const checkOrder = await collection.findOne({_id: new ObjectId(orderId)});
+    const checkOrder = await collection.findOne({ _id: new ObjectId(orderId) });
     // console.log("ORDER", checkOrder)
 
     let updateOperation;
@@ -167,6 +167,11 @@ export async function updateOrderDetails(orderData, prevState, formData) {
         success: true,
         message: "Order saved successfully!",
       };
+    } else if (updatedValue.acknowledged && updatedValue.modifiedCount === 0) {
+      return {
+        success: true,
+        message: "Nothing to update the order!",
+      };
     } else {
       return {
         success: false,
@@ -240,7 +245,7 @@ export async function deleteSubOrder(orderId, subOrderId) {
       success: true,
       message: "Order deleted successfully!",
     };
-  }else {
+  } else {
     return {
       success: false,
       message: "An internal error occured updating an order",
