@@ -23,12 +23,13 @@ export async function GET(request) {
 
     const result = await collection.findOne({ _id: new ObjectId(orderId) });
 
-    subOrder = result.orders ? result.orders[subOrderId - 1] : 0;
-    totalSubOrder = result.orders ? result.orders.length : 0;
+    // console.log("RESULT: ", result)
+    subOrder = result?.orders ? result.orders[subOrderId - 1] : 0;
+    totalSubOrder = result?.orders ? result.orders.length : 0;
 
     // console.log(subOrder)
   } catch (error) {
-    console.log(error);
+    console.log("Error: ", error);
     return Response.json({
       error: true,
       message: "Error occured",

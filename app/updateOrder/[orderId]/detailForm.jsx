@@ -556,8 +556,8 @@ export default function DetailForm({ orderId }) {
         <div className="text-center">No Data Found</div>
       )}
       {subOrder.error && (
-        <div className="flex justify-self-center w-fit px-2 py-1 bg-red-500 rounded-md">
-          <p className="w-fix">Error occured fetching orders</p>
+        <div className="flex justify-self-center w-fit px-2 py-1 bg-red-500 rounded-md mt-5">
+          <p className="w-fix">Error occured fetching order</p>
         </div>
       )}
       {subOrder.totalSubOrder < 1 && (
