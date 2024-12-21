@@ -37,13 +37,22 @@ export default function DetailForm({ orderId, nosOfSubOrder }) {
 
   return (
     <div className="mt-5 w-full">
-      <div>
+      <div className="border-b border-red-900 mb-4 pb-4">
         <p className="text-right">
-          Order ID: {orderId}/{nosOfSubOrder + 1} {}
+          Order ID: {orderId} / {nosOfSubOrder + 1} {}
         </p>
       </div>
       <div>
         <form action={formAction} className="flex flex-col gap-4">
+          <div className="flex justify-end">
+            <FoodInput
+              lable="ડીશ નો ભાવ :"
+              bulletType={"star"}
+              maxWidth={"100px"}
+              nosOfField={1}
+              dbLabel="pricePerPlate"
+            />
+          </div>
           <div className="flex md:flex-row flex-col gap-5 justify-between">
             <FoodInput
               lable="ઓર્ડર તારીખ:"
@@ -55,14 +64,14 @@ export default function DetailForm({ orderId, nosOfSubOrder }) {
             <FoodInput
               lable="સમય:"
               bulletType={"star"}
-              maxWidth={"200px"}
+              maxWidth={"100px"}
               nosOfField={1}
               dbLabel="orderTime"
             />
             <FoodInput
               lable="માણસ:"
               bulletType={"star"}
-              maxWidth={"200px"}
+              maxWidth={"100px"}
               nosOfField={1}
               dbLabel="guestCount"
             />

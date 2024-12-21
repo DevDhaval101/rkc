@@ -132,6 +132,17 @@ export default function DetailForm({ orderId }) {
 
             <div>
               <form action={formAction} className="flex flex-col gap-4">
+                <div className="flex justify-end">
+                  <FoodInput
+                    lable="ડીશ નો ભાવ :"
+                    bulletType={"star"}
+                    maxWidth={"100px"}
+                    nosOfField={1}
+                    dbLabel="pricePerPlate"
+                    value={subOrder.pricePerPlate}
+                    updateHandler={updateHandler}
+                  />
+                </div>
                 <div className="flex md:flex-row flex-col gap-5 justify-between">
                   <FoodInput
                     lable="ઓર્ડર તારીખ:"
@@ -145,7 +156,7 @@ export default function DetailForm({ orderId }) {
                   <FoodInput
                     lable="સમય:"
                     bulletType={"star"}
-                    maxWidth={"200px"}
+                    maxWidth={"100px"}
                     nosOfField={1}
                     dbLabel="orderTime"
                     value={subOrder.orderTime}
@@ -154,7 +165,7 @@ export default function DetailForm({ orderId }) {
                   <FoodInput
                     lable="માણસ:"
                     bulletType={"star"}
-                    maxWidth={"200px"}
+                    maxWidth={"100px"}
                     nosOfField={1}
                     dbLabel="guestCount"
                     value={subOrder.guestCount}

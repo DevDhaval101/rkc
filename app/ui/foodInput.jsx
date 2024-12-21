@@ -7,7 +7,7 @@ export default function FoodInput({
   hide,
 }) {
   return (
-    <div className="flex gap-8 w-full">
+    <div className="flex gap-8">
       <div className="flex">
         {bulletType === "star" && (
           <span className="md:text-5xl text-base text-red-900">&#9733;</span>
