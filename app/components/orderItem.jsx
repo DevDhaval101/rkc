@@ -25,7 +25,8 @@ export default function OrderItem({ order }) {
     "serving",
     "waterJug",
     "addtionalRespoCaterer",
-    "hasExtra"
+    "hasExtra",
+    "pricePerPlate",
   ];
 
   const displayTagList = [
@@ -92,7 +93,9 @@ export default function OrderItem({ order }) {
           {
             <div className="flex gap-2 flex-wrap flex-col md:flex-row print:flex-row">
               {groupedTags[tag].map((item, index) => (
-                <p key={`${item} + ${index}`} className="min-w-[200px]">{`${index + 1}. ${item}`}</p>
+                <p key={`${item} + ${index}`} className="min-w-[200px]">{`${
+                  index + 1
+                }. ${item}`}</p>
               ))}
             </div>
           }
@@ -115,9 +118,13 @@ export default function OrderItem({ order }) {
       <div className="flex gap-2 flex-wrap md:flex-nowrap md:flex-col print:flex-col">
         {mainTags}
       </div>
-      <div className="text-2xl print:text-3xl mt-5 text-red-900 font-bold underline">
-        ખાના ખજાના
-      </div>
+
+      {/* only display tag if there is items */}
+      {khanaKazanaList.length > 0 && (
+        <div className="text-2xl print:text-3xl mt-5 text-red-900 font-bold underline">
+          ખાના ખજાના
+        </div>
+      )}
       <div>
         <ul className="list-decimal list-inside">{khanaKazanaList}</ul>
       </div>

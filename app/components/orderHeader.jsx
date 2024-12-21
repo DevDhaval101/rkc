@@ -31,7 +31,7 @@ export default function OrderHeader({ order, estimate, subOrderId }) {
           </p>
         </div>
         <div className="md:text-xl text-base text-right pt-4 pr-2">
-          Order ID: {`${orderId.slice(orderId.length - 6, orderId.length)}/${subOrderId + 1}`}
+          Order ID: {`${orderId.slice(orderId.length - 6, orderId.length)} / ${subOrderId + 1}`}
         </div>
       </div>
     </div>
