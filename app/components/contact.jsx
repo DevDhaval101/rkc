@@ -4,12 +4,14 @@ import styles from "./bgGredient.module.css";
 
 export default function Contact() {
   return (
-    <div className={`flex flex-col items-center gap-8 h-[100%] + ${styles.custom_bg}`}>
-      <div>
+    <div
+      className={`flex flex-col items-center gap-8 h-[100%] + ${styles.custom_bg}`}
+    >
+      <div className="mt-4">
         <Image
-          src="/logo.png"
-          width={700}
-          height={700}
+          src="/rkc-logo-3.jpg"
+          width={2026}
+          height={2108}
           alt={"logo"}
           className="md:w-[200px] w-[100px] print:w-[350px]"
         ></Image>
@@ -30,9 +32,7 @@ export default function Contact() {
             ></Image>
           </a>
         </p>
-        <p className="text-xl print:text-3xl">
-          Sureshbhai : +9199259 06645
-        </p>
+        <p className="text-xl print:text-3xl">Sureshbhai : +9199259 06645</p>
         <p className="text-xl flex gap-2 items-center print:text-3xl">
           Dhavalbhai :<a href="tel:+919712336832">+9197123 36832</a>
           <a href="https://api.whatsapp.com/send?phone=9712336832">

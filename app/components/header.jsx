@@ -5,15 +5,15 @@ export default function Header() {
   return (
     <header className="bg-[#262626] flex items-center px-2 py-1">
       <Link href={"/"}>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center pt-3 pb-3">
           <Image
-            src="/logo.png"
-            width={700}
-            height={700}
+            src="/rkc-logo-3.jpg"
+            width={2026}
+            height={2108}
             alt="logo"
-            className="md:w-[100px] w-[50px]"
+            className="md:w-[200px] w-[100px]"
           ></Image>
-          <div className="flex flex-col items-center">
+          {/* <div className="flex flex-col items-center">
             <div className="flex md:gap-4 gap-2 border-b-2 border-white justify-center w-full px-2">
               <Image
                 src="/spoon.png"
@@ -34,7 +34,7 @@ export default function Header() {
             <p className="text-white md:text-xl text-xs text-nowrap">
               We Belive In Quality
             </p>
-          </div>
+          </div> */}
         </div>
       </Link>
 
