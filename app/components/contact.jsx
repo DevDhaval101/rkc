@@ -32,18 +32,18 @@ export default function Contact() {
             ></Image>
           </a>
         </p>
-        <p className="text-xl print:text-3xl">Sureshbhai : +9199259 06645</p>
-        <p className="text-xl flex gap-2 items-center print:text-3xl">
+        <p className="text-2xl flex gap-2 items-center print:text-3xl">
           Dhavalbhai :<a href="tel:+919712336832">+9197123 36832</a>
           <a href="https://api.whatsapp.com/send?phone=9712336832">
             <Image
               src="/whatsapp.png"
-              width={20}
-              height={20}
+              width={30}
+              height={30}
               alt="Whatsapp logo"
             ></Image>
           </a>
         </p>
+        <p className="text-2xl print:text-3xl">Sureshbhai : +9199259 06645</p>
       </div>
     </div>
   );
