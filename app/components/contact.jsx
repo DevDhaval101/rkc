@@ -32,7 +32,7 @@ export default function Contact() {
             ></Image>
           </a>
         </p>
-        <p className="text-2xl flex gap-2 items-center print:text-3xl">
+        <p className="text-2xl flex gap-2 items-center print:text-4xl">
           Dhavalbhai :<a href="tel:+919712336832">+9197123 36832</a>
           <a href="https://api.whatsapp.com/send?phone=9712336832">
             <Image
@@ -43,7 +43,7 @@ export default function Contact() {
             ></Image>
           </a>
         </p>
-        <p className="text-2xl print:text-3xl">Sureshbhai : +9199259 06645</p>
+        <p className="text-2xl print:text-4xl">Sureshbhai : +9199259 06645</p>
       </div>
     </div>
   );

@@ -3,7 +3,8 @@ import Link from "next/link";
 
 export default function HeaderGuj() {
   return (
-    <header className="bg-[#262626] flex items-center px-2 py-1">
+    // temp fix of header going in anothrt page during print problem using print:p-6
+    <header className="bg-[#262626] flex items-center px-2 py-1 print:p-6"> 
       <Link href={'/'}>
         <div className="flex flex-col items-center pt-3 pb-3">
           <Image
